@@ -11,3 +11,5 @@ Vì để không lỗi conflict trong code của nhau nên anh em đặt tên fi
 Deadline: chậm nhất ngày thứ 4 tuần sau (Tối 10/12/2025), làm nhanh để còn các phần khác nữa:)).  
 
 * Anh em lập account git để t mời vào project nhé.
+- Chỉ push code lên branch của mình (tôi có tạo 4 branch cho 4 ae rồi đấy) đừng push lên nhánh main nha ae. 
+URL của project: https://github.com/DuongAnhLeo/BookLife.git 
