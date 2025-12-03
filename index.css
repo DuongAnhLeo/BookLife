@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f1eee3;
+  color: #333;
+  height: 100vh;
+  overflow: hidden; /* Không cho cuộn cả trang, chỉ cuộn phần nội dung */
+}
+
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+/* --- 2. SIDEBAR (THANH BÊN TRÁI) --- */
+.sidebar {
+  width: 80px; /* Độ rộng hẹp */
+  height: 100%;
+  background-color: #f1eee3; /* Nền trong suốt để hiện màu kem của body */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  border-right: 1px solid rgba(0, 0, 0, 0.05); /* Viền mờ rất nhẹ */
+}
+
+/* Logo icon trên cùng */
+.logo-icon {
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: #333;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Khoảng cách giữa các icon */
+  width: 100%;
+  align-items: center;
+}
+
+.menu-item {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #666; /* Màu icon thường */
+  font-size: 20px;
+  transition: all 0.3s ease;
+  border-radius: 12px; /* Bo góc icon */
+}
+
+/* Trạng thái Active: Nền đỏ cam giống ảnh */
+.menu-item.active {
+  background-color: #ff6b6b; /* Màu đỏ cam */
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+.menu-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+/* --- 3. MAIN CONTENT (BÊN PHẢI) --- */
+.main-content {
+  flex: 1; /* Chiếm hết phần còn lại */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
+
+/* HEADER */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* Thanh tìm kiếm */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #555;
+  width: 400px;
+}
+
+.search-box i {
+  font-size: 18px;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  color: #333;
+}
+
+/* Khu vực User bên phải */
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.flag-icon {
+  width: 18px;
+  height: 12px;
+  object-fit: cover;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-profile .username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* --- 4. DANH SÁCH SÁCH --- */
+.scroll-container {
+  overflow-y: auto; /* Cho phép cuộn dọc nội dung */
+  flex: 1;
+  padding-right: 10px; /* Tránh thanh cuộn dính sát nội dung */
+}
+
+/* Ẩn thanh cuộn cho đẹp */
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+.book-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline; /* Căn chân chữ */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.section-title a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666;
+}
+
+.book-list {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto; /* Cho phép cuộn ngang */
+  padding-bottom: 15px;
+}
+
+/* Ẩn thanh cuộn ngang của list sách */
+.book-list::-webkit-scrollbar {
+  display: none;
+}
+
+.book-card {
+  min-width: 160px;
+  width: 160px;
+  cursor: pointer;
+}
+
+.book-cover {
+  width: 100%;
+  height: 240px;
+  border-radius: 12px; /* Bo góc ảnh giống thiết kế */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  transition: transform 0.3s;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-card:hover .book-cover {
+  transform: translateY(-5px);
+}
+
+.book-card .title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  /* Giới hạn 2 dòng tiêu đề */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card .author {
+  font-size: 12px;
+  color: #777;
+}
