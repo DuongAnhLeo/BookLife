@@ -1,0 +1,460 @@
+/* 1. Cài đặt chung (Reset & Base Styles) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Font chữ sạch, hiện đại */
+}
+
+body {
+  max-width: 1920px;
+  max-height: 1080px;
+  overflow: hidden; /* Ẩn thanh cuộn để giao diện cố định */
+  background-color: #fff;
+  display: flex;
+}
+
+.container {
+  /* Đảm bảo nó luôn lấp đầy màn hình hiện tại */
+  width: 100vw;
+  height: 100vh;
+  /* Tùy chọn: Đặt kích thước tối đa để ngăn nó quá rộng trên màn hình lớn */
+  max-width: 1920px;
+  max-height: 1080px;
+  /
+}
+
+/* 2. Header (Logo & Language) */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100; /* Luôn nổi trên cùng */
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name_top-left {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #009fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.name_top-right {
+  font-size: 14px;
+  font-weight: 600;
+}
+.body-img {
+  display: flex;
+}
+/* Sách bên trái (Wind in the Willows) */
+.left_img img {
+  width: 450px;
+  height: 659px;
+  position: absolute;
+  top: 424px;
+
+  border-radius: 20px;
+  transform: rotate(-deg);
+}
+
+/* Sách ở giữa (Les Misérables) - Sách chính */
+.mid-img img {
+  width: 558px;
+  height: 817px;
+  position: absolute;
+  top: 262px;
+  left: 146px;
+  z-index: 3; /* Nổi lên trên */
+}
+
+/* Sách bên phải (Around the World) */
+.right_img img {
+  position: absolute;
+  width: auto;
+  height: 659px;
+  top: 418px;
+  left: 460.39px;
+  transform: rotate(deg);
+  z-index: 2;
+}
+
+/* Lớp phủ lượn sóng (Subtract) */
+/* Đây là phần quan trọng để tạo đường cong trắng che lên sách */
+.right_picture_subtract {
+  position: absolute;
+  top: 0;
+  left: 274px;
+  right: 0; /* Căn phải của khối body-img */
+  height: 1080px;
+  width: 1646px;
+  pointer-events: none; /* Cho phép click xuyên qua nếu cần */
+  z-index: 10;
+}
+
+.right_picture_subtract img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh phủ kín */
+  object-position: right;
+  box-shadow: none; /* Bỏ bóng đổ của class img chung */
+  border-radius: 0;
+}
+
+/* 4. Phần Form Đăng nhập (Bên phải) */
+.login-form-container {
+  position: absolute;
+  right: 10%; /* Cách lề phải 10% */
+  top: 50%;
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  width: 400px;
+  z-index: 50;
+  background: transparent;
+}
+
+.login-form-container h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Nút Social (Google/Apple) */
+.google,
+.apple {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.google:hover,
+.apple:hover {
+  background-color: #f5f5f5;
+}
+
+.google img,
+.apple img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Đường kẻ phân cách (Or) */
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.separator hr {
+  flex-grow: 1;
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.separator span {
+  padding: 0 10px;
+}
+
+/* Form Inputs */
+/* --- CẤU HÌNH CHUNG --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Hoặc font bạn đang dùng */
+}
+
+/* Ẩn phần hình ảnh mắt thừa (do HTML có cả icon font và ảnh img) */
+.eye_option {
+    display: none;
+}
+
+/* --- CONTAINER FORM ĐĂNG NHẬP --- */
+.login-form-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 480px; /* Giới hạn chiều rộng form cho đẹp */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tiêu đề */
+.login-form-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* --- NÚT GOOGLE & APPLE --- */
+.google, .apple {
+    width: 100%;
+    height: 55px;
+    background-color: #fff;
+    border: 2px solid #000; /* Viền đen dày */
+    border-radius: 12px;    /* Bo góc */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.google:hover, .apple:hover {
+    background-color: #f5f5f5;
+}
+
+.google img, .apple img {
+    height: 24px;
+    width: auto;
+}
+
+.name_gg, .name_apple {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+/* --- ĐƯỜNG PHÂN CÁCH (OR) --- */
+.separator {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    color: #999;
+}
+
+.separator hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* --- FORM NHẬP LIỆU --- */
+.login-container {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+    border-radius: 20px;
+    
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* --- Social Buttons --- */
+.social-btn {
+    width: 100%;
+    height: 55px;
+    margin-bottom: 15px;
+    background: #fff;
+    border: 2px solid #000; /* Viền đen dày */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.social-btn:hover {
+    background-color: #f9f9f9;
+}
+
+.social-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.social-btn span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* --- Separator (OR) --- */
+.separator {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    color: #888;
+}
+
+.separator hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background: #ddd;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* --- Input Groups (Quan trọng) --- */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+/* Input Styles */
+.input-wrapper input {
+    width: 100%;
+    height: 55px;
+    padding: 0 20px; /* Padding phải chừa chỗ cho icon mắt */
+    padding-right: 45px; 
+    border: 2px solid #000;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.input-wrapper input:focus {
+    border-color: #009eff;
+}
+
+/* Label Styles (Nằm đè lên viền) */
+.input-wrapper label {
+    position: absolute;
+    left: 15px;
+    top: -10px; /* Đẩy label lên trên viền */
+    background-color: #fff; /* Nền trắng che viền */
+    padding: 0 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    pointer-events: none; /* Cho phép click xuyên qua label vào input */
+}
+
+/* Đổi màu label khi input focus */
+.input-wrapper input:focus ~ label {
+    color: #009eff;
+}
+
+/* Icon Mắt */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+}
+
+/* --- Options Row --- */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-me input {
+    width: 18px;
+    height: 18px;
+    accent-color: #000;
+    cursor: pointer;
+}
+
+.forgot-link {
+    text-decoration: none;
+    color: #009eff;
+    font-weight: 600;
+}
+
+/* --- Submit Button --- */
+.submit-btn {
+    width: 100%;
+    height: 55px;
+    background: #009eff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #007acd;
+}
+
+/* --- Sign Up Link --- */
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #009eff;
+    text-decoration: none;
+    font-weight: 700;
+}
+.login-container{
+  position: relative;
+  margin-left: 1170px;
+  margin-top: 277px;
+  margin-right: 370px;
+  z-index: 100;
+}

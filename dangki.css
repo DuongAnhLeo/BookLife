@@ -1,0 +1,236 @@
+/* --- THIẾT LẬP CHUNG --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  overflow: hidden; /* Ẩn thanh cuộn nếu màn hình nhỏ */
+}
+
+/* --- LOGO & HEADER --- */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100; /* Luôn nổi trên cùng */
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name_top-left {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #009fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.name_top-right {
+  font-size: 14px;
+  font-weight: 600;
+}
+.body-img {
+  display: flex;
+}
+/* Sách bên trái (Wind in the Willows) */
+.left_img img {
+  width: 450px;
+  height: 659px;
+  position: absolute;
+  top: 424px;
+
+  border-radius: 20px;
+  transform: rotate(-deg);
+}
+
+/* Sách ở giữa (Les Misérables) - Sách chính */
+.mid-img img {
+  width: 558px;
+  height: 817px;
+  position: absolute;
+  top: 262px;
+  left: 146px;
+  z-index: 3; /* Nổi lên trên */
+}
+
+/* Sách bên phải (Around the World) */
+.right_img img {
+  position: absolute;
+  width: auto;
+  height: 659px;
+  top: 418px;
+  left: 460.39px;
+  transform: rotate(deg);
+  z-index: 2;
+}
+
+/* Lớp phủ lượn sóng (Subtract) */
+/* Đây là phần quan trọng để tạo đường cong trắng che lên sách */
+.right_picture_subtract {
+  position: absolute;
+  top: 0;
+  left: 274px;
+  right: 0; /* Căn phải của khối body-img */
+  height: 1080px;
+  width: 1646px;
+  pointer-events: none; /* Cho phép click xuyên qua nếu cần */
+  z-index: 10;
+}
+
+.right_picture_subtract img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh phủ kín */
+  object-position: right;
+  box-shadow: none; /* Bỏ bóng đổ của class img chung */
+  border-radius: 0;
+}
+
+/* CỘT PHẢI - FORM ĐĂNG KÝ */
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 450px;
+  padding-top: 60px; /* Để tránh đụng header */
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* --- STYLING CHO INPUT (LABEL TRÊN VIỀN) --- */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #333; /* Màu viền đậm */
+  border-radius: 8px; /* Bo góc */
+  font-size: 15px;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #009eff;
+  border-width: 1.5px;
+}
+
+/* Label nằm đè lên viền */
+.input-group label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background-color: #ffffff; /* Nền trắng để che viền input */
+  padding: 0 5px;
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.input-group .toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+}
+
+/* --- NÚT ĐĂNG KÝ --- */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #009eff; /* Màu xanh dương */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #007acd;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  .left-panel,
+  .wave-separator {
+    display: none; /* Ẩn ảnh trên mobile */
+  }
+  .right-panel {
+    padding: 20px;
+  }
+  .form-wrapper {
+    padding-top: 20px;
+  }
+  .header {
+    position: relative;
+    margin-bottom: 20px;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  body {
+    flex-direction: column;
+    overflow: auto;
+  }
+}
+.right-panel {
+  position: absolute;
+  z-index: 100;
+  margin-left: 1300px;
+  margin-top: 170px;
+  margin-right: 420px;
+  width: 500px;
+  height: 708px;
+}
