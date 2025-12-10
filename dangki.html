@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookLife - Đăng ký</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="dangki.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="top-left">
+          <img src="./bookmark.png" alt="" />
+          <span class="name_top-left">BookLife</span>
+        </div>
+        <div class="top-right">
+          <span class="name_top-right">VN</span>
+          <img src="./Image VN.png" alt="" />
+        </div>
+      </div>
+      <div class="body-img">
+        <div class="left_img">
+          <img src="./The Wind in the Willows.png" alt="" />
+        </div>
+        <div class="mid-img">
+          <img src="./Les Misérables.png" alt="" />
+        </div>
+        <div class="right_img">
+          <img src="./Around the World in Eighty Days.png" alt="" />
+        </div>
+        <div class="right_picture_subtract">
+          <img src="./Subtract.png" alt="" />
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="form-wrapper">
+          <h1 class="form-title">Đăng ký</h1>
+          <p class="form-subtitle">Hãy đến và tạo một tài khoản</p>
+
+          <form action="#">
+            <div class="input-group">
+              <label>Họ và tên</label>
+              <input type="text" required />
+            </div>
+
+            <div class="input-group">
+              <label>Tên tài khoản</label>
+              <input type="text" required />
+            </div>
+
+            <div class="input-group">
+              <label>Email</label>
+              <input type="email" required />
+            </div>
+
+            <div class="input-group">
+              <label>Số điện thoại</label>
+              <input type="tel" required />
+            </div>
+
+            <div class="input-group">
+              <label>Mật khẩu</label>
+              <input type="password" id="password" required />
+              <i
+                class="fa-solid fa-eye-slash toggle-password"
+                onclick="togglePass('password', this)"
+              ></i>
+            </div>
+
+            <div class="input-group">
+              <label>Nhập lại Mật khẩu</label>
+              <input type="password" id="re-password" required />
+              <i
+                class="fa-solid fa-eye-slash toggle-password"
+                onclick="togglePass('re-password', this)"
+              ></i>
+            </div>
+
+            <button type="submit" class="submit-btn">Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="dangki.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập | BookLife</title>
+    <link rel="stylesheet" href="dangnhap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+        <div class="header">
+            <div class="top-left">
+                <img src="./bookmark.png" alt="">
+                <span class="name_top-left">BookLife</span>
+            </div>
+            <div class="top-right">
+                <span class="name_top-right">VN</span>
+                <img src="./Image VN.png" alt="">
+            </div>
+        </div>
+        <div class="body-img">
+            <div class="left_img">
+                <img src="./The Wind in the Willows.png" alt="">
+            </div>
+            <div class="mid-img">
+                <img src="./Les Misérables.png" alt="">
+            </div>
+            <div class="right_img">
+                <img src="./Around the World in Eighty Days.png" alt="">
+            </div>
+            <div class="right_picture_subtract">
+                <img src="./Subtract.png" alt="">
+            </div>
+        </div>
+        <div class="login-container">
+          <h2 class="form-title">Đăng nhập</h2>
+
+          <div class="social-login">
+              <button class="social-btn">
+                  <img src="./Google@2x.png" alt="Google">
+                  <span>Đăng nhập bằng Google</span>
+              </button>
+              <button class="social-btn">
+                  <img src="./Apple.png" alt="Apple">
+                  <span>Đăng nhập bằng Apple</span>
+              </button>
+          </div>
+
+          <div class="separator">
+              <hr>
+              <span>Or</span>
+              <hr>
+          </div>
+
+          <form class="login-form">
+              <div class="input-wrapper">
+                  <input type="email" id="email" required placeholder=" " autocomplete="off">
+                  <label for="email">Email</label>
+              </div>
+
+              <div class="input-wrapper">
+                  <input type="password" id="password" required placeholder=" ">
+                  <label for="password">Mật khẩu</label>
+                  <i class="fa-solid fa-eye-slash toggle-password" id="togglePassword"></i>
+              </div>
+
+              <div class="options">
+                  <div class="remember-me">
+                      <input type="checkbox" id="remember">
+                      <label for="remember">Ghi nhớ đăng nhập</label>
+                  </div>
+                  <a href="#" class="forgot-link">Quên mật khẩu?</a>
+              </div>
+
+              <button type="submit" class="submit-btn">Đăng nhập</button>
+          </form>
+
+          <div class="signup-link">
+              Chưa có tài khoản? <a href="http://127.0.0.1:3000/dangki.html?serverWindowId=f4c90a53-256d-4a31-bc2c-3d2bb778ee0a">Đăng ký</a>
+          </div>
+      </div>
+      </div>
+    </div>
+    <script src="dangnhap.js"></script>
+  </body>
+</html>
