@@ -1,0 +1,148 @@
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #f1eee3;
+}
+
+/* body {
+  background-color: #f1eee3;
+} */
+/* .web_content {
+  display: flex;
+  width: 100%;
+  gap: 100px;
+} */
+
+.web_content {
+  display: flex;
+  gap: 100px;
+  /* max-width: 1080px; */
+  width: 100%;
+}
+
+.left_header {
+  padding-left: 25px;
+  padding-right: 20px;
+  border-right: 3px solid #cccccc;
+}
+
+.logo img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.logo {
+  margin-top: 25px;
+}
+
+.nav_bar .ul {
+  list-style: none;
+  margin-top: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 0;
+}
+
+.save1_img {
+  margin-left: -8px;
+}
+
+.right_content {
+  /* border: 1px solid black; */
+  width: 100%;
+}
+
+.upper_content {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  /* width: 100%; */
+  /* border:  1px black solid; */
+  padding-inline: 50px;
+}
+
+.book_title {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding: 0;
+}
+
+.book_title img {
+  width: 32px;
+  height: 32px;
+}
+
+.book_title h3 {
+  margin: 5px;
+}
+
+.chuong {
+  /* display: flex;
+    justify-content: center; */
+  text-align: center;
+  align-items: center;
+}
+
+.book_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Mỗi trang nội dung */
+.right_book_content,
+.left_book_content {
+  width: 550px; /* cố định độ rộng 2 trang */
+  min-height: 644px; /* giữ chiều cao trang đều nhau */
+  line-height: 1.6; /* cho dễ đọc */
+  text-align: justify; /* căn đều hai bên cho đẹp */
+}
+
+.right_content {
+  background-color: white;
+}
+
+.icons ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.ds_chuong {
+  margin-top: 80px;
+}
+
+.ds_chuong ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page_num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+}
