@@ -1,0 +1,85 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; 
+    overflow-x: hidden; 
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('BG (1).png'); 
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: left; 
+    position: relative; 
+}
+.form-box{      
+   position: absolute;
+   left: 1700px;
+   top: 500px;
+   
+
+
+}
+.form-box h1{
+    font-size: 38px;
+    margin-bottom: 0.5px;
+    
+}
+.form-box p{
+   color:#181821 ;
+   margin-top: 0.5px; 
+}
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid #6c757d;
+    margin-bottom: 15px;
+}
+.form-box button {
+    width: 92%;
+    padding: 10px;
+    border: none;
+    color: white;
+    background: #0099ff;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+ul {
+
+  list-style-type: none; 
+  margin: 0;           
+  padding: 10px; 
+  margin-left: 110px;          
+}
+.input-group {
+    position: relative;
+    margin-bottom: 10px; 
+    width: 300px; 
+}   
+.input-group label {    
+    position: absolute;
+    top: 50%;
+    left: 12px; 
+    transform: translateY(-50%); 
+    color: #6c757d; 
+    font-size: 16px;
+    pointer-events: none; 
+    transition: all 0.3s ease;
+}
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown) + label {
+    top: 0px; 
+    left: 10px; 
+    font-size: 14px; 
+    color: #000;
+    background-color: white; 
+    padding: 0 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    transform: translateY(-50%); 
+    z-index: 1; 
+}
