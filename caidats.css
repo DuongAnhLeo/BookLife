@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #f4efe6;
+    font-family: Arial, sans-serif;
+}
+.sidebar {
+    width: 150px;
+    height: 150vh;
+    background: #f4efe6;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    border-right: 5px solid #ddd;
+    
+}
+.sidebar img {
+    width: 50px;
+    display: flex;
+    margin: 20px auto;
+    cursor: pointer;
+}
+#Logo{
+    border-right: 3px;
+    padding: 15px 30px 15px 30px;
+    padding-bottom: 239px;
+}
+#menu{
+    padding-bottom: 50px;
+}
+.header {
+    margin-left: 150px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    background: #f4efe6;
+    
+} 
+.search-box {
+    
+    display: flex;
+    align-items: center;
+    width: 600px;
+    padding: 8px 12px; 
+    margin-left: 20px;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 20px;
+   
+}
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.logovi span{
+    padding: 8px 12px; 
+    border-radius: 50px;
+}
+.logovi img{
+    border-radius: 0;
+    width: 25px;
+    height: 25px;
+}
+.content {
+    margin-top: 100px;
+    margin-left: 700px;
+    padding: 150px 100px;
+    display: flex;
+    gap: 20px;
+}
+
+.form-box input, select {
+    width: 330px;
+    padding: 20px;
+    margin: 10px 0;
+    border: 4px solid #181821;
+    background-color: #f4efe6;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+.field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    padding: 10px 20px;
+    background: #0084ff;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.avatar-box {
+    text-align: center;
+}
+.avatar-box img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* Footer */
+.footer {
+    width: 120%;
+    margin-left: 300px;
+    padding: 50px 100px;
+    display: flex;
+    gap: 500px;
+    color: #333;
+    font-size: 14px;
+        
+}
+
+.lastfooter{
+    width: 120%;
+    margin-left: 300px;
+    padding: 50px 100px;
+    padding-top: 100px;
+    display: flex;
+    color: #333;
+    font-size: 14px;
+}
+.lastfooter p{
+    margin-left: 1000px;
+    padding-right: 30px;
+}

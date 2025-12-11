@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile UI</title>
+    <link rel="stylesheet" href="caidats.css">
+
+</head>
+<body>
+ 
+<!-- 1 -->
+<div class="sidebar" >
+    <img src="Logo.png" id="Logo">
+    <img src="House.png" id="menu">
+    <img src="History.png" id="menu">
+    <img src="Save 1.png" id="menu">
+    <img src="Setting.png" id="menu">
+    
+</div>
+
+<!-- 2 -->
+<div class="header">
+    <div class="search-box">
+        <img src="" alt="">
+        <input type="text" placeholder="Search book, name, author...">
+    </div>
+    <div class="user-info">
+        <div class="logovi">
+            <span>VN</span>
+            <img src="Image VN.png" alt="">
+        </div>
+        <img src="Avatar.png"  alt="">
+        <span>Harleen Quinzel</span>
+        <img src="Bell.png" alt="">
+    </div>
+</div>
+
+<!-- 3 -->
+<div class="content">
+    <div class="form-box">
+        <label>Email</label><br>
+        <input type="email" value="alma.lawson@example.com"><br>
+
+        <label>Mật khẩu</label><br>
+        <input type="password" value="00000000"><br>
+
+        <label>Họ và tên</label><br>
+        <input type="text" value="Harleen Quinzel"><br>
+
+        <div class="row">
+            <div class="field">
+                <label>Ngày sinh</label><br>
+                <input type="date" value="1900-01-01">
+                
+            </div>
+            <div class="field">
+                <label>Giới tính</label><br>
+                <select>
+                    <option>Nữ</option>
+                    <option>Nam</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn">Xác nhận</button>
+    </div>
+<!-- 4 -->
+    <div class="avatar-box">
+        <img id="avatar" src="Avatar.png">
+        <br><br>
+        <input type="file" id="upload" style="display:none">
+        <button class="btn" onclick="document.getElementById('upload').click()">Thay ảnh</button><br>
+        <button class="btn" style="background:#009FFF">Đăng xuất</button>
+    </div>
+
+</div>
+<!-- 5 -->
+<div class="footer">
+    <div style="width:20%">
+        <img src="Logo.png" alt="">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing<br> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+    </div>
+    <div>
+        <h4>Services</h4>
+        <p>Email Marketing</p>
+        <p>Campaigns</p>
+        <p>Branding</p>
+        <p>Offline</p>
+    </div>
+    <div>
+        <h4>About</h4>
+        <p>Our Story</p>
+        <p>Benefits</p>
+        <p>Team</p>
+        <p>Careers</p>
+    </div>
+    <div>
+        <h4>Follow Us</h4>
+        <p>Facebook</p>
+        <p>Twitter</p>
+        <p>Instagram</p>
+    </div>
+</div>
+<div class="lastfooter">
+    <h4>Copyright © 2020. LogoIpsum. All rights reserved.</h4>
+    <p>Terms & Conditions</p>
+    <p>Privacy Policy</p>
+</div>
+
+<script>
+    // đổi ảnh đại diện
+    document.getElementById("upload").addEventListener("change", function (e) {
+        let file = e.target.files[0];
+        if (!file) return;
+
+        let img = document.getElementById("avatar");
+        img.src = URL.createObjectURL(file);
+    });
+</script>
+
+</body>
+</html>
