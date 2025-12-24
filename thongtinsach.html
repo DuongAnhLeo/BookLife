@@ -92,14 +92,6 @@
             <div class="book-info">
               <h1 class="book-title-large" id="book-title">Đang tải...</h1>
 
-              <div class="rating-row">
-                <span class="score" id="book-rating">0.0</span>
-                <div class="stars">
-                  <i class="fa-solid fa-star" style="color: gold"></i>
-                </div>
-                <span class="review-count" id="book-views">• 0 lượt xem</span>
-              </div>
-
               <div class="meta-grid">
                 <div class="meta-item">
                   <span class="label">Tác giả</span>
@@ -139,7 +131,6 @@
                   ></i>
 
                   <i class="fa-regular fa-heart" title="Yêu thích"></i>
-                  <i class="fa-solid fa-share-nodes" title="Chia sẻ"></i>
                 </div>
               </div>
 
@@ -154,39 +145,30 @@
             style="margin-top: 30px; padding: 0 40px"
           >
             <h3>Bình luận</h3>
-            <div
-              class="comment-item"
-              style="display: flex; gap: 15px; margin-top: 15px"
-            >
-              <div class="comment-avatar">
-                <img
-                  src="./Image/logo.png"
-                  alt="User"
-                  style="
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                  "
-                />
-              </div>
-              <div class="comment-content">
-                <div class="comment-header" style="margin-bottom: 5px">
-                  <span
-                    class="comment-author"
-                    style="font-weight: bold; font-size: 14px"
-                    >Người dùng mẫu</span
-                  >
-                  <span
-                    class="comment-time"
-                    style="font-size: 12px; color: #888; margin-left: 10px"
-                    >Vừa xong</span
-                  >
-                </div>
-                <p class="comment-text" style="font-size: 14px; color: #444">
-                  Truyện hay quá, hóng chương mới!
-                </p>
-              </div>
+
+            <div class="comment-input-box">
+              <img
+                id="cmt-my-avatar"
+                src="./Image/logo.png"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                "
+              />
+              <textarea
+                id="cmt-content"
+                rows="2"
+                placeholder="Chia sẻ cảm nghĩ của bạn về cuốn sách này..."
+              ></textarea>
+              <button class="btn-submit-cmt" onclick="postComment()">
+                Gửi
+              </button>
+            </div>
+
+            <div id="comment-list">
+              <p style="color: #888">Chưa có bình luận nào.</p>
             </div>
           </div>
 
@@ -202,18 +184,20 @@
               </div>
               <div class="footer-col">
                 <h4>Dịch vụ</h4>
-                <a href="#">Đọc sách</a>
-                <a href="#">Tải sách</a>
+                <a href="index.html">Đọc sách</a>
               </div>
               <div class="footer-col">
                 <h4>Về chúng tôi</h4>
-                <a href="#">Câu chuyện</a>
-                <a href="#">Liên hệ</a>
+                <a href="gioithieu.html">Câu chuyện</a>
               </div>
               <div class="footer-col social-col">
                 <h4>Theo dõi</h4>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-                <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="https://www.facebook.com/ah.duong.9484"
+                  ><i class="fa-brands fa-facebook-f"></i> Facebook</a
+                >
+                <a href="https://www.instagram.com/d.anh_7805/"
+                  ><i class="fa-brands fa-instagram"></i> Instagram</a
+                >
               </div>
             </div>
             <div class="footer-bottom">

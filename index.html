@@ -10,6 +10,48 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <style>
+      /* CSS CHO THANH DANH MỤC (MỚI THÊM) */
+      .category-filter {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 10px 0;
+        margin-bottom: 20px;
+        white-space: nowrap;
+        /* Ẩn thanh cuộn nhưng vẫn cuộn được */
+        scrollbar-width: none; /* Firefox */
+      }
+      .category-filter::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+      }
+
+      .cat-btn {
+        border: 1px solid #ddd;
+        background: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #555;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .cat-btn:hover {
+        background: #f0f0f0;
+        color: #000;
+        border-color: #bbb;
+      }
+
+      /* Trạng thái đang chọn */
+      .cat-btn.active {
+        background: #0288d1;
+        color: white;
+        border-color: #0288d1;
+      }
+    </style>
   </head>
   <body>
     <div class="layout">
@@ -103,7 +145,13 @@
           <div class="book-section">
             <div class="section-title">
               <h2 id="section-heading">MỚI NHẤT</h2>
-              <a href="#" class="view-more">Xem thêm</a>
+              <a href="index.html" class="view-more">Xem tất cả</a>
+            </div>
+
+            <div id="category-filter" class="category-filter">
+              <span style="font-size: 14px; color: #999"
+                >Đang tải danh mục...</span
+              >
             </div>
 
             <div id="book-container" class="book-list">
@@ -123,18 +171,20 @@
               </div>
               <div class="footer-col">
                 <h4>Dịch vụ</h4>
-                <a href="#">Đọc sách</a>
-                <a href="#">Tải sách</a>
+                <a href="index.html">Đọc sách</a>
               </div>
               <div class="footer-col">
                 <h4>Về chúng tôi</h4>
-                <a href="#">Câu chuyện</a>
-                <a href="#">Liên hệ</a>
+                <a href="gioithieu.html">Câu chuyện</a>
               </div>
               <div class="footer-col social-col">
                 <h4>Theo dõi</h4>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-                <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="https://www.facebook.com/ah.duong.9484"
+                  ><i class="fa-brands fa-facebook-f"></i> Facebook</a
+                >
+                <a href="https://www.instagram.com/d.anh_7805/"
+                  ><i class="fa-brands fa-instagram"></i> Instagram</a
+                >
               </div>
             </div>
             <div class="footer-bottom">

@@ -2,11 +2,21 @@ const API_URL = "http://localhost:3000";
 const STORIES_ENDPOINT = API_URL + "/stories";
 const USERS_ENDPOINT = API_URL + "/users";
 const CATEGORIES_ENDPOINT = API_URL + "/categories";
-const CHAPTERS_ENDPOINT = API_URL + "/chapters"; // Endpoint mới
+const CHAPTERS_ENDPOINT = API_URL + "/chapters";
 
 let allStories = [];
 let allCategories = [];
 
+// --- 1. HELPER: XỬ LÝ TIẾNG VIỆT (Để tìm kiếm thông minh) ---
+function removeVietnameseTones(str) {
+  if (!str) return "";
+  str = str.toLowerCase();
+  str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  str = str.replace(/đ/g, "d");
+  return str;
+}
+
+// --- 2. KHỞI TẠO ---
 document.addEventListener("DOMContentLoaded", () => {
   checkLogin();
   fetchDashboardData();
@@ -35,10 +45,10 @@ async function fetchDashboardData() {
     const users = await resUsers.json();
     allCategories = await resCats.json();
 
-    const totalViews = allStories.reduce((sum, s) => sum + (s.views || 0), 0);
+    // --- CẬP NHẬT THỐNG KÊ ---
     document.getElementById("total-books").innerText = allStories.length;
-    document.getElementById("total-views").innerText =
-      totalViews.toLocaleString("vi-VN");
+    document.getElementById("total-categories").innerText =
+      allCategories.length;
     document.getElementById("total-users").innerText = users.length;
 
     renderStoryTable(allStories);
@@ -100,9 +110,6 @@ function renderStoryTable(data) {
   });
 }
 
-// ... (Giữ nguyên các hàm loadCategoriesToSelect, openModal, closeModal, bookForm submit...)
-// Phần này không thay đổi logic cũ, chỉ copy lại cho đủ
-
 function loadCategoriesToSelect() {
   const select = document.getElementById("story-category");
   select.innerHTML = '<option value="">-- Chọn danh mục --</option>';
@@ -113,9 +120,11 @@ function loadCategoriesToSelect() {
     select.appendChild(option);
   });
 }
+
 const bookModal = document.getElementById("bookModal");
 const bookForm = document.getElementById("book-form");
 const previewImg = document.getElementById("preview-img");
+
 window.openModal = () => {
   bookForm.reset();
   document.getElementById("book-id").value = "";
@@ -125,6 +134,7 @@ window.openModal = () => {
   bookModal.style.display = "flex";
 };
 window.closeModal = () => (bookModal.style.display = "none");
+
 document.getElementById("cover").addEventListener("input", function () {
   if (this.value) {
     previewImg.src = this.value;
@@ -133,6 +143,7 @@ document.getElementById("cover").addEventListener("input", function () {
     previewImg.style.display = "none";
   }
 });
+
 bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("book-id").value;
@@ -143,13 +154,13 @@ bookForm.addEventListener("submit", async (e) => {
     cover: document.getElementById("cover").value,
     description: document.getElementById("description").value,
     categoryId: document.getElementById("story-category").value,
-    views: id ? getStory(id).views : 0,
     rating: id ? getStory(id).rating : 5,
   };
   await handleSave(STORIES_ENDPOINT, id, data, "sách");
   closeModal();
   fetchDashboardData();
 });
+
 window.editBook = (id) => {
   const s = getStory(id);
   loadCategoriesToSelect();
@@ -167,21 +178,38 @@ window.editBook = (id) => {
   document.getElementById("modal-title").innerText = "Cập nhật sách";
   bookModal.style.display = "flex";
 };
+
 window.deleteBook = (id) =>
   handleDelete(STORIES_ENDPOINT, id, "sách", fetchDashboardData);
+
 function getStory(id) {
   return allStories.find((s) => s.id == id) || {};
 }
+
+// --- LOGIC TÌM KIẾM MỚI (Tên + Tác giả + Danh mục) ---
 document.getElementById("search-story").addEventListener("input", (e) => {
-  const key = e.target.value.toLowerCase();
-  const filtered = allStories.filter((s) =>
-    s.title.toLowerCase().includes(key)
-  );
+  const keyword = removeVietnameseTones(e.target.value).trim();
+  const filtered = allStories.filter((s) => {
+    const title = removeVietnameseTones(s.title);
+    const author = removeVietnameseTones(s.author);
+
+    // Tìm tên danh mục từ ID
+    const categoryObj = allCategories.find((c) => c.id == s.categoryId);
+    const categoryName = categoryObj
+      ? removeVietnameseTones(categoryObj.name)
+      : "";
+
+    // So sánh: tìm trong Tên Sách, Tên Tác Giả, hoặc Tên Danh Mục
+    return (
+      title.includes(keyword) ||
+      author.includes(keyword) ||
+      categoryName.includes(keyword)
+    );
+  });
   renderStoryTable(filtered);
 });
 
-// ================= MODULE 2 & 3: USERS & CATEGORIES (Giữ nguyên) =================
-// ... (Phần code User và Category của bạn giữ nguyên, không cần sửa gì) ...
+// ================= MODULE 2 & 3: USERS & CATEGORIES =================
 async function fetchUsersTable() {
   const res = await fetch(USERS_ENDPOINT);
   const users = await res.json();
@@ -241,6 +269,7 @@ window.deleteUser = (id) =>
     fetchUsersTable();
     fetchDashboardData();
   });
+
 // Categories
 async function fetchCategoriesTable() {
   const res = await fetch(CATEGORIES_ENDPOINT);
@@ -298,60 +327,41 @@ window.deleteCategory = (id) =>
   });
 
 // ==========================================================
-// MODULE 4: QUẢN LÝ CHƯƠNG (NEW FEATURE)
+// MODULE 4: QUẢN LÝ CHƯƠNG
 // ==========================================================
 const chapterModal = document.getElementById("chapterModal");
 
-// 1. Mở Modal Quản lý Chương
 window.openChapterManager = async (storyId) => {
-  // Lưu storyId vào input ẩn để biết đang thêm chương cho truyện nào
   document.getElementById("current-story-id").value = storyId;
-
-  // Tìm tên truyện để hiển thị lên tiêu đề Modal
   const story = getStory(storyId);
   document.getElementById(
     "chapter-modal-title"
   ).innerText = `Quản lý chương: ${story.title}`;
-
-  // Reset form editor
   resetChapterForm();
-
-  // Tải danh sách chương
   await fetchChapters(storyId);
-
   chapterModal.style.display = "flex";
 };
 
 window.closeChapterModal = () => (chapterModal.style.display = "none");
 
-// 2. Tải danh sách chương
 async function fetchChapters(storyId) {
   const listContainer = document.getElementById("chapter-list-container");
   listContainer.innerHTML = "Đang tải...";
-
   try {
     const res = await fetch(`${CHAPTERS_ENDPOINT}?storyId=${storyId}`);
     const chapters = await res.json();
-
     listContainer.innerHTML = "";
     if (chapters.length === 0) {
       listContainer.innerHTML =
         "<div style='padding:10px; color:#999'>Chưa có chương nào</div>";
     }
-
     chapters.forEach((chap) => {
       const div = document.createElement("div");
       div.className = "chapter-item";
-      div.innerHTML = `
-                <span>${chap.title}</span>
-                <button class="btn-small btn-red" onclick="deleteChapter(event, '${chap.id}', '${storyId}')">Xóa</button>
-            `;
-      // Click vào để sửa
+      div.innerHTML = `<span>${chap.title}</span><button class="btn-small btn-red" onclick="deleteChapter(event, '${chap.id}', '${storyId}')">Xóa</button>`;
       div.onclick = (e) => {
-        // Tránh trigger sự kiện click khi bấm nút xóa
         if (e.target.tagName !== "BUTTON") {
           loadChapterToEditor(chap);
-          // Hightlight dòng đang chọn
           document
             .querySelectorAll(".chapter-item")
             .forEach((i) => i.classList.remove("active"));
@@ -366,14 +376,12 @@ async function fetchChapters(storyId) {
   }
 }
 
-// 3. Load chương vào Editor để sửa
 function loadChapterToEditor(chapter) {
   document.getElementById("current-chapter-id").value = chapter.id;
   document.getElementById("editor-title").value = chapter.title;
   document.getElementById("editor-content").value = chapter.content;
 }
 
-// 4. Reset Editor để thêm mới
 window.resetChapterForm = () => {
   document.getElementById("current-chapter-id").value = "";
   document.getElementById("editor-title").value = "";
@@ -383,7 +391,6 @@ window.resetChapterForm = () => {
     .forEach((i) => i.classList.remove("active"));
 };
 
-// 5. Lưu Chương (Thêm/Sửa)
 window.saveChapter = async () => {
   const storyId = document.getElementById("current-story-id").value;
   const chapterId = document.getElementById("current-chapter-id").value;
@@ -394,12 +401,10 @@ window.saveChapter = async () => {
     alert("Vui lòng nhập tiêu đề và nội dung!");
     return;
   }
-
   const data = { storyId, title, content };
 
   try {
     if (chapterId) {
-      // Sửa
       await fetch(`${CHAPTERS_ENDPOINT}/${chapterId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -407,7 +412,6 @@ window.saveChapter = async () => {
       });
       alert("Đã cập nhật chương!");
     } else {
-      // Thêm mới
       await fetch(CHAPTERS_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -415,8 +419,6 @@ window.saveChapter = async () => {
       });
       alert("Đã thêm chương mới!");
     }
-
-    // Reload danh sách chương & reset form
     fetchChapters(storyId);
     resetChapterForm();
   } catch (error) {
@@ -424,9 +426,8 @@ window.saveChapter = async () => {
   }
 };
 
-// 6. Xóa Chương
 window.deleteChapter = async (event, chapterId, storyId) => {
-  event.stopPropagation(); // Ngăn sự kiện click vào item cha
+  event.stopPropagation();
   if (confirm("Bạn có chắc muốn xóa chương này?")) {
     await fetch(`${CHAPTERS_ENDPOINT}/${chapterId}`, { method: "DELETE" });
     fetchChapters(storyId);
@@ -474,7 +475,6 @@ function setupOutsideClick() {
     if (event.target == bookModal) closeModal();
     if (event.target == userModal) closeUserModal();
     if (event.target == catModal) closeCategoryModal();
-    // Không đóng chapterModal khi click ngoài để tránh mất nội dung đang viết
   };
 }
 document.getElementById("btn-logout").addEventListener("click", () => {

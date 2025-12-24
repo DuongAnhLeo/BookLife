@@ -12,39 +12,47 @@ if (!currentUser.bookmarks) currentUser.bookmarks = [];
 
 const API_URL = "http://localhost:3000/stories";
 const USER_API_URL = "http://localhost:3000/users";
+const COMMENT_API_URL = "http://localhost:3000/comments"; // API cho bình luận
+
+// Biến toàn cục lưu ID sách hiện tại
+let currentBookId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- CẬP NHẬT HEADER (AVATAR & TÊN) ---
   updateHeaderUI();
+
+  // Hiển thị avatar của user hiện tại ở khung chat
+  const myAvatarEl = document.getElementById("cmt-my-avatar");
+  if (myAvatarEl) {
+    myAvatarEl.src = currentUser.avatar || "./Image/logo.png";
+  }
 
   // --- XỬ LÝ ID SÁCH ---
   const urlParams = new URLSearchParams(window.location.search);
   const bookId = urlParams.get("id");
 
   if (bookId) {
+    currentBookId = bookId; // Lưu lại để dùng cho chức năng comment
     fetchBookDetail(bookId);
+    fetchComments(bookId); // Tải danh sách bình luận
   } else {
     alert("Không tìm thấy ID sách!");
     window.location.href = "index.html";
   }
 });
 
-// --- HÀM CẬP NHẬT GIAO DIỆN HEADER (MỚI THÊM) ---
+// --- HÀM CẬP NHẬT GIAO DIỆN HEADER ---
 function updateHeaderUI() {
-  // 1. Cập nhật Avatar và Tên
   const avatarEl = document.getElementById("header-avatar");
   const nameEl = document.getElementById("header-username");
 
   if (avatarEl) {
-    // Nếu user có avatar thì dùng, không thì dùng logo mặc định
     avatarEl.src = currentUser.avatar || "./Image/logo.png";
   }
   if (nameEl) {
-    // Ưu tiên hiện tên đầy đủ, nếu không có thì hiện username
     nameEl.textContent = currentUser.fullName || currentUser.username;
   }
 
-  // 2. Xử lý nút Đăng xuất (ở Sidebar)
   const btnLogout = document.getElementById("btn-logout");
   if (btnLogout) {
     btnLogout.addEventListener("click", () => {
@@ -56,18 +64,15 @@ function updateHeaderUI() {
   }
 }
 
-// --- CÁC HÀM CŨ (Giữ nguyên logic của bạn) ---
-
+// --- LẤY THÔNG TIN SÁCH ---
 async function fetchBookDetail(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) throw new Error("Không tìm thấy sách");
 
     const book = await response.json();
-
     displayBookDetail(book);
 
-    // Kích hoạt nút
     setupBookmarkButton(book.id);
     setupHeartButton(book.id);
   } catch (error) {
@@ -90,19 +95,16 @@ function displayBookDetail(book) {
   document.getElementById("book-author").textContent = book.author;
   document.getElementById("book-status").textContent = book.status;
   document.getElementById("book-desc").textContent = book.description;
-  document.getElementById("book-rating").textContent = book.rating;
-  document.getElementById(
-    "book-views"
-  ).textContent = `• ${book.views} lượt xem`;
+  // Đã xóa phần hiển thị rating và views
 
   const readBtn = document.getElementById("btn-read-link");
   readBtn.href = `docsach.html?id=${book.id}`;
 }
 
-// --- XỬ LÝ BOOKMARK ---
+// --- BOOKMARK & FAVORITE ---
 function setupBookmarkButton(bookId) {
   const btnSave = document.getElementById("btn-save");
-  const bookIdNumber = Number(bookId); // Đảm bảo so sánh số với số
+  const bookIdNumber = Number(bookId);
 
   let isSaved = currentUser.bookmarks.includes(bookIdNumber);
   updateBookmarkIcon(btnSave, isSaved);
@@ -136,7 +138,6 @@ function updateBookmarkIcon(btn, isSaved) {
   }
 }
 
-// --- XỬ LÝ TIM ---
 function setupHeartButton(bookId) {
   const btnHeart = document.querySelector(".fa-heart");
   const bookIdNumber = Number(bookId);
@@ -171,7 +172,6 @@ function updateHeartIcon(btn, isLoved) {
   }
 }
 
-// --- LƯU DỮ LIỆU ---
 async function saveUserData() {
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   try {
@@ -187,3 +187,109 @@ async function saveUserData() {
     console.error("Lỗi khi lưu dữ liệu user:", error);
   }
 }
+
+// ==========================================================
+// CHỨC NĂNG BÌNH LUẬN (COMMENTS)
+// ==========================================================
+
+// 1. Lấy danh sách bình luận của truyện
+async function fetchComments(storyId) {
+  try {
+    // Lấy comment theo storyId và sắp xếp theo thời gian mới nhất
+    // Lưu ý: json-server hỗ trợ _sort và _order
+    const res = await fetch(
+      `${COMMENT_API_URL}?storyId=${storyId}&_sort=createdAt&_order=desc`
+    );
+    const comments = await res.json();
+    renderComments(comments);
+  } catch (error) {
+    console.error("Lỗi tải bình luận:", error);
+  }
+}
+
+// 2. Hiển thị bình luận ra HTML
+function renderComments(comments) {
+  const listEl = document.getElementById("comment-list");
+  if (comments.length === 0) {
+    listEl.innerHTML =
+      '<p style="color: #888;">Hãy là người đầu tiên bình luận!</p>';
+    return;
+  }
+
+  listEl.innerHTML = "";
+  comments.forEach((cmt) => {
+    const timeString = new Date(cmt.createdAt).toLocaleString("vi-VN");
+
+    // Tạo HTML cho từng comment
+    const div = document.createElement("div");
+    div.className = "comment-item";
+    div.style.display = "flex";
+    div.style.gap = "15px";
+    div.style.marginTop = "15px";
+
+    div.innerHTML = `
+      <div class="comment-avatar">
+        <img src="${cmt.userAvatar || "./Image/logo.png"}" 
+             alt="User" 
+             style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+      </div>
+      <div class="comment-content">
+        <div class="comment-header" style="margin-bottom: 5px;">
+          <span class="comment-author" style="font-weight: bold; font-size: 14px;">
+            ${cmt.userName}
+          </span>
+          <span class="comment-time" style="font-size: 12px; color: #888; margin-left: 10px;">
+            ${timeString}
+          </span>
+        </div>
+        <p class="comment-text" style="font-size: 14px; color: #444; margin: 0;">
+          ${cmt.content}
+        </p>
+      </div>
+    `;
+    listEl.appendChild(div);
+  });
+}
+
+// 3. Đăng bình luận mới
+window.postComment = async () => {
+  const contentInput = document.getElementById("cmt-content");
+  const content = contentInput.value.trim();
+
+  if (!content) {
+    alert("Vui lòng nhập nội dung bình luận!");
+    return;
+  }
+
+  if (!currentBookId) return;
+
+  const newComment = {
+    storyId: currentBookId,
+    userId: currentUser.id,
+    userName: currentUser.fullName || currentUser.username,
+    userAvatar: currentUser.avatar || "./Image/logo.png",
+    content: content,
+    createdAt: new Date().toISOString(), // Lưu thời gian hiện tại
+  };
+
+  try {
+    // Gửi lên server
+    const res = await fetch(COMMENT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newComment),
+    });
+
+    if (res.ok) {
+      // Reset ô nhập
+      contentInput.value = "";
+      // Tải lại danh sách comment để thấy comment mới
+      fetchComments(currentBookId);
+    } else {
+      alert("Có lỗi khi gửi bình luận.");
+    }
+  } catch (error) {
+    console.error("Lỗi post comment:", error);
+    alert("Không thể kết nối đến server.");
+  }
+};

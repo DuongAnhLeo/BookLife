@@ -5,64 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BookLife - Quản trị viên</title>
     <link rel="stylesheet" href="./css/admin.css" />
-    <style>
-      /* CSS cho Modal Quản lý Chương */
-      .chapter-layout {
-        display: flex;
-        height: 500px;
-        gap: 20px;
-      }
-      .chapter-list-sidebar {
-        flex: 1;
-        border-right: 1px solid #eee;
-        overflow-y: auto;
-        padding-right: 10px;
-      }
-      .chapter-editor {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .chapter-item {
-        padding: 10px;
-        border-bottom: 1px solid #f0f0f0;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .chapter-item:hover {
-        background-color: #f9f9f9;
-      }
-      .chapter-item.active {
-        background-color: #e3f2fd;
-        color: #1976d2;
-        font-weight: bold;
-      }
-
-      .btn-small {
-        padding: 4px 8px;
-        font-size: 12px;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-      }
-      .btn-red {
-        background: #ffebee;
-        color: #d32f2f;
-      }
-
-      #editor-content {
-        flex: 1;
-        resize: none;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-family: monospace;
-      }
-    </style>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -117,15 +59,17 @@
               <p id="total-books">0</p>
             </div>
           </div>
+
           <div class="stat-card">
             <div class="stat-icon" style="background: #e8f5e9; color: #2e7d32">
-              <i class="fa-solid fa-eye"></i>
+              <i class="fa-solid fa-list"></i>
             </div>
             <div class="stat-info">
-              <h3>Lượt xem</h3>
-              <p id="total-views">0</p>
+              <h3>Tổng danh mục</h3>
+              <p id="total-categories">0</p>
             </div>
           </div>
+
           <div class="stat-card">
             <div class="stat-icon" style="background: #fff3e0; color: #ef6c00">
               <i class="fa-solid fa-users"></i>
@@ -147,7 +91,7 @@
                   <input
                     type="text"
                     id="search-story"
-                    placeholder="Tìm tên sách..."
+                    placeholder="Tìm tên sách, tác giả, danh mục..."
                   />
                 </div>
                 <button class="btn-primary" onclick="openModal()">
@@ -236,8 +180,8 @@
             <input type="hidden" id="book-id" />
             <div class="form-row">
               <div class="form-group" style="flex: 2">
-                <label>Tên sách</label
-                ><input
+                <label>Tên sách</label>
+                <input
                   type="text"
                   id="title"
                   required
@@ -245,8 +189,8 @@
                 />
               </div>
               <div class="form-group" style="flex: 1">
-                <label>Danh mục</label
-                ><select id="story-category" required>
+                <label>Danh mục</label>
+                <select id="story-category" required>
                   <option value="">-- Chọn --</option>
                 </select>
               </div>
@@ -256,8 +200,8 @@
                 <label>Tác giả</label><input type="text" id="author" required />
               </div>
               <div class="form-group">
-                <label>Trạng thái</label
-                ><select id="status">
+                <label>Trạng thái</label>
+                <select id="status">
                   <option value="Đang ra">Đang ra</option>
                   <option value="Hoàn thành">Hoàn thành</option>
                 </select>
@@ -271,7 +215,8 @@
                   id="cover"
                   placeholder="./Image/..."
                   style="flex: 1"
-                /><img
+                />
+                <img
                   src=""
                   id="preview-img"
                   style="
@@ -295,8 +240,9 @@
                 class="btn-secondary"
                 onclick="closeModal()"
               >
-                Hủy</button
-              ><button type="submit" class="btn-primary">Lưu lại</button>
+                Hủy
+              </button>
+              <button type="submit" class="btn-primary">Lưu lại</button>
             </div>
           </form>
         </div>
@@ -325,8 +271,8 @@
               ><input type="text" id="user-password" required />
             </div>
             <div class="form-group">
-              <label>Vai trò</label
-              ><select id="user-role">
+              <label>Vai trò</label>
+              <select id="user-role">
                 <option value="user">Người dùng (User)</option>
                 <option value="admin">Quản trị viên (Admin)</option>
               </select>
@@ -337,13 +283,15 @@
                 class="btn-secondary"
                 onclick="closeUserModal()"
               >
-                Hủy</button
-              ><button type="submit" class="btn-primary">Lưu User</button>
+                Hủy
+              </button>
+              <button type="submit" class="btn-primary">Lưu User</button>
             </div>
           </form>
         </div>
       </div>
     </div>
+
     <div id="categoryModal" class="modal">
       <div class="modal-content" style="width: 400px">
         <div class="modal-header">
@@ -367,8 +315,9 @@
                 class="btn-secondary"
                 onclick="closeCategoryModal()"
               >
-                Hủy</button
-              ><button type="submit" class="btn-primary">Lưu Danh mục</button>
+                Hủy
+              </button>
+              <button type="submit" class="btn-primary">Lưu Danh mục</button>
             </div>
           </form>
         </div>
@@ -405,7 +354,6 @@
                 <div class="chapter-item">Đang tải...</div>
               </div>
             </div>
-
             <div class="chapter-editor">
               <input type="hidden" id="current-story-id" />
               <input type="hidden" id="current-chapter-id" />

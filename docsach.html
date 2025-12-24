@@ -6,7 +6,6 @@
     <title>Đọc sách - BookLife</title>
     <link rel="stylesheet" href="./Css/index.css" />
     <link rel="stylesheet" href="./Css/docsach.css" />
-    <link rel="stylesheet" href="./JavaScript/thongtinsach.js" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -49,12 +48,6 @@
             <button class="tool-btn" id="btnOpenTOC" title="Mục lục">
               <i class="fa-regular fa-clipboard"></i>
             </button>
-            <button class="tool-btn">
-              <i class="fa-regular fa-bookmark"></i>
-            </button>
-            <button class="tool-btn">
-              <i class="fa-regular fa-pen-to-square"></i>
-            </button>
           </div>
         </header>
 
@@ -69,9 +62,7 @@
               <h1 id="chapter-title">Đang tải...</h1>
             </div>
 
-            <div class="text-columns" id="chapter-content">
-              <p>Đang tải nội dung...</p>
-            </div>
+            <div class="text-columns" id="chapter-content"></div>
           </div>
 
           <button class="nav-arrow next" id="btn-next">
@@ -79,7 +70,7 @@
           </button>
         </div>
 
-        <div class="page-number" id="page-info">1/--</div>
+        <div class="page-number" id="page-info"></div>
 
         <aside class="toc-sidebar" id="tocSidebar">
           <div class="toc-header">

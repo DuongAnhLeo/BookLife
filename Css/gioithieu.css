@@ -1,0 +1,189 @@
+/* --- GIOITHIEU.CSS --- */
+
+/* Container chính của phần giới thiệu */
+.about-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* 1. Banner chào mừng */
+.about-banner {
+  text-align: center;
+  padding: 40px 0 60px 0;
+}
+
+.about-banner h1 {
+  font-size: 36px;
+  color: #ff6b6b; /* Tone màu chủ đạo của bạn */
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.about-banner p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* 2. Khối Câu chuyện (Text + Ảnh) */
+.about-content-block {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 50px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Gạch chân trang trí dưới tiêu đề */
+.about-text h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #ff6b6b;
+  border-radius: 2px;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+}
+
+.about-image {
+  flex: 1;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  height: 300px;
+}
+
+/* 3. Grid Giá trị cốt lõi */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.value-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: #ff6b6b;
+}
+
+.value-card i {
+  font-size: 40px;
+  color: #ff6b6b;
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.value-card p {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* 4. Đội ngũ phát triển */
+.team-section {
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.member-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.member-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #f1eee3;
+}
+
+.member-card h4 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.member-card span {
+  font-size: 13px;
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* --- Responsive cho trang giới thiệu --- */
+@media (max-width: 768px) {
+  .about-content-block {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .about-image img {
+    height: 200px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-banner h1 {
+    font-size: 28px;
+  }
+}
