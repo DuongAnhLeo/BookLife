@@ -1,3 +1,4 @@
+/* --- 1. GLOBAL RESET --- */
 * {
   margin: 0;
   padding: 0;
@@ -9,14 +10,16 @@ body {
   background-color: #f1eee3;
   color: #333;
   height: 100vh;
-  overflow: hidden; /* Không cho cuộn cả trang, chỉ cuộn phần nội dung */
+  overflow: hidden; /* Ẩn thanh cuộn của body để cuộn bên trong div con */
 }
 
+/* --- 2. LAYOUT CHÍNH --- */
 .layout {
   display: flex;
   height: 100%;
 }
 
+/* SIDEBAR (BÊN TRÁI) */
 .sidebar {
   width: 80px;
   height: 100%;
@@ -25,23 +28,30 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 30px;
-  border-right: 2px solid #c9c9c9; /* Viền mờ*/
+  border-right: 2px solid #e0e0e0;
+  z-index: 10;
 }
 
-/* Logo icon trên cùng */
 .logo-icon {
-  font-size: 12px;
-  margin-bottom: 130px;
-  color: #333;
+  margin-bottom: 50px;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+.logo-icon:hover {
+  transform: scale(1.1);
+}
+.logo-icon img {
+  width: 40px;
+  height: auto;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Khoảng cách giữa các icon */
+  gap: 20px;
   width: 100%;
   align-items: center;
+  height: 100%; /* Để đẩy nút logout xuống đáy */
 }
 
 .menu-item {
@@ -51,17 +61,17 @@ body {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #666; /* Màu icon thường */
+  color: #666;
   font-size: 20px;
+  border-radius: 12px;
   transition: all 0.3s ease;
-  border-radius: 12px; /* Bo góc icon */
 }
 
-/* Trạng thái Active: Nền đỏ cam giống ảnh */
+/* Trạng thái Active & Hover */
 .menu-item.active {
-  background-color: #ff6b6b; /* Màu đỏ cam */
+  background-color: #ff6b6b;
   color: white;
-  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
 }
 
 .menu-item:hover:not(.active) {
@@ -71,10 +81,11 @@ body {
 
 /* --- 3. MAIN CONTENT (BÊN PHẢI) --- */
 .main-content {
-  flex: 1; /* Chiếm hết phần còn lại */
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px 40px;
+  overflow: hidden; /* Để scroll-container bên trong hoạt động */
 }
 
 /* HEADER */
@@ -82,7 +93,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Header không bị co lại khi nội dung dài */
 }
 
 /* Thanh tìm kiếm */
@@ -90,12 +102,16 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
-  color: #555;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
   width: 400px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .search-box i {
-  font-size: 18px;
+  color: #888;
+  font-size: 16px;
 }
 
 .search-box input {
@@ -107,7 +123,7 @@ body {
   color: #333;
 }
 
-/* Khu vực User bên phải */
+/* User Area */
 .user-area {
   display: flex;
   align-items: center;
@@ -117,149 +133,287 @@ body {
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
+  gap: 8px;
+  padding: 6px 12px;
   border: 1px solid #ddd;
   border-radius: 20px;
   background-color: white;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.2s;
+}
+.lang-switch:hover {
+  background-color: #f9f9f9;
 }
 
 .flag-icon {
-  width: 18px;
-  height: 12px;
+  width: 20px;
+  height: 14px;
   object-fit: cover;
+  border-radius: 2px;
 }
 
+/* Profile khi chưa đăng nhập */
+#guest-action a {
+  font-size: 14px;
+  transition: color 0.2s;
+}
+#guest-action a:hover {
+  color: #ff6b6b !important;
+}
+
+/* Profile khi đã đăng nhập */
 .user-profile {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 5px 10px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
 .user-profile img {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .user-profile .username {
   text-decoration: none;
-  color: inherit;
-  display: block;
+  color: #333;
   font-size: 14px;
   font-weight: 600;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.notification {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* --- 4. DANH SÁCH SÁCH --- */
+/* --- 4. SCROLL CONTAINER (Vùng cuộn chính) --- */
 .scroll-container {
-  overflow-y: auto; /* Cho phép cuộn dọc nội dung */
+  overflow-y: auto;
   flex: 1;
-  padding-right: 10px; /* Tránh thanh cuộn dính sát nội dung */
+  padding-right: 10px; /* Tạo khoảng cách với thanh scrollbar */
 }
 
-/* Ẩn thanh cuộn cho đẹp */
+/* Tùy chỉnh Scrollbar */
 .scroll-container::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
 }
 .scroll-container::-webkit-scrollbar-thumb {
-  background-color: #ddd;
-  border-radius: 3px;
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
 }
 
+/* --- 5. DANH SÁCH SÁCH (GRID SYSTEM - ĐÃ SỬA) --- */
 .book-section {
   margin-bottom: 50px;
+  min-height: 500px; /* Giữ chiều cao tối thiểu */
 }
 
 .section-title {
   display: flex;
-  align-items: baseline; /* Căn chân chữ */
-  gap: 10px;
-  margin-bottom: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
 .section-title h2 {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 800;
   text-transform: uppercase;
   color: #222;
+  letter-spacing: 0.5px;
 }
 
-.section-title a {
+.view-more {
   text-decoration: none;
   font-size: 13px;
-  color: #666;
+  font-weight: 600;
+  color: #ff6b6b;
+  transition: 0.2s;
+}
+.view-more:hover {
+  color: #e05555;
+  text-decoration: underline;
 }
 
+/* Lưới sách Responsive */
 .book-list {
-  display: grid; /* Sử dụng Grid để chia cột */
-  grid-template-columns: repeat(6, 1fr); /* Bắt buộc chia 6 cột đều nhau */
-  gap: 25px; /* Khoảng cách giữa các sách */
-  padding-bottom: 50px; /* Khoảng trống dưới cùng để không bị sát đáy */
+  display: grid;
+  /* Tự động tính toán số cột, mỗi cột tối thiểu 180px */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 30px; /* Khoảng cách giữa các ô */
+  padding-bottom: 50px;
   width: 100%;
 }
 
-/* Ẩn thanh cuộn ngang của list sách */
-.book-list::-webkit-scrollbar {
-  display: none;
-}
-
 .book-card {
-  width: 100%; /* Chiếm hết chiều rộng của cột lưới */
-  min-width: unset; /* Bỏ giới hạn chiều rộng cũ */
+  width: 100%;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .book-card a {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.book-card a:hover .title {
-  color: #0099ff;
+/* Hiệu ứng hover cho card */
+.book-card:hover {
+  transform: translateY(-5px);
+}
+.book-card:hover .title {
+  color: #ff6b6b;
 }
 
 .book-cover {
   width: 100%;
-  aspect-ratio: 2 / 3; /* Giữ tỷ lệ ảnh chuẩn (Rộng 2 / Cao 3) */
-  height: auto; /* Để chiều cao tự tính theo tỷ lệ */
-  border-radius: 12px;
+  aspect-ratio: 2 / 3; /* Tỷ lệ chuẩn bìa sách */
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 12px;
-  transition: transform 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  margin-bottom: 15px;
 }
 
 .book-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s;
 }
 
-.book-card:hover .book-cover {
-  transform: translateY(-5px);
+.book-card:hover .book-cover img {
+  transform: scale(1.05); /* Zoom nhẹ ảnh khi hover */
 }
 
 .book-card .title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   margin-bottom: 5px;
   line-height: 1.4;
   display: -webkit-box;
+  -webkit-line-clamp: 2; /* Chỉ hiện tối đa 2 dòng tên sách */
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.2s;
 }
 
 .book-card .author {
-  font-size: 12px;
+  font-size: 13px;
   color: #777;
+}
+
+/* --- 6. FOOTER --- */
+.site-footer {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px 30px;
+  margin-top: auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.brand-col .footer-logo img {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.footer-col h4 {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.footer-col a {
+  display: block;
+  text-decoration: none;
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.footer-col a:hover {
+  color: #ff6b6b;
+  padding-left: 5px; /* Hiệu ứng dịch chuyển nhẹ */
+}
+
+.footer-bottom {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    padding-top: 20px;
+  }
+  .logo-icon {
+    margin-bottom: 30px;
+  }
+  .menu-item {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  .main-content {
+    padding: 15px 20px;
+  }
+
+  .top-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  .search-box {
+    width: 100%;
+  }
+  .user-area {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .book-list {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(130px, 1fr)
+    ); /* Nhỏ hơn trên mobile */
+    gap: 15px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
