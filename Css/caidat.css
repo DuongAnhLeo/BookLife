@@ -1,0 +1,280 @@
+/* --- CSS CHO TRANG CÀI ĐẶT --- */
+.setting-page {
+  padding-bottom: 50px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+.settings-container {
+  max-width: 800px; /* Giới hạn chiều rộng để form không bị bè ra */
+  /* margin: 0 auto;  Nếu muốn căn giữa toàn bộ form */
+}
+
+/* Các khối Section */
+.setting-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- PHẦN 1: PROFILE EDIT --- */
+.profile-edit-box {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Avatar Upload */
+.avatar-upload {
+  flex-shrink: 0;
+}
+.avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+}
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+.avatar-wrapper:hover .camera-icon {
+  opacity: 1;
+}
+
+/* Form Grid */
+.form-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 cột */
+  gap: 20px;
+}
+.full-width {
+  grid-column: span 2; /* Chiếm hết 2 cột */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+.form-control {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.form-control:focus {
+  border-color: #0099ff;
+}
+textarea.form-control {
+  resize: vertical;
+}
+
+/* --- PHẦN 2: TÙY CHỌN & SWITCH --- */
+.options-list {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 10px 20px;
+}
+
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.option-item:last-child {
+  border-bottom: none;
+}
+
+.option-info {
+  display: flex;
+  flex-direction: column;
+}
+.opt-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+.opt-desc {
+  font-size: 12px;
+  color: #888;
+  margin-top: 3px;
+}
+
+/* Toggle Switch (Nút gạt) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #0099ff;
+}
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.form-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+/* --- PHẦN 3: BẢO MẬT & ACTION --- */
+.security-actions {
+  display: flex;
+  gap: 15px;
+}
+.btn-outline {
+  padding: 10px 20px;
+  border: 1px solid #333;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.btn-outline:hover {
+  background: #333;
+  color: white;
+}
+
+.btn-danger {
+  padding: 10px 20px;
+  border: 1px solid #ff4d4f;
+  color: #ff4d4f;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn-danger:hover {
+  background: #ff4d4f;
+  color: white;
+}
+
+/* Nút Lưu cuối trang */
+.form-actions {
+  margin-top: 50px;
+  display: flex;
+  gap: 15px;
+  border-top: 1px solid #eee;
+  padding-top: 30px;
+}
+.btn-save {
+  padding: 12px 30px;
+  background-color: #0099ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 153, 255, 0.3);
+}
+.btn-save:hover {
+  background-color: #0088cc;
+}
+
+.btn-cancel {
+  padding: 12px 30px;
+  background: #f1f1f1;
+  color: #555;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .profile-edit-box {
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-grid {
+    grid-template-columns: 1fr; /* 1 cột trên mobile */
+    width: 100%;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+}

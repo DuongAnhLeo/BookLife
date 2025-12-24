@@ -1,0 +1,254 @@
+/* --- CẤU HÌNH CHUNG --- */
+.main-content.reading-mode {
+  background-color: #f4f1ea;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* Mặc định xếp dọc */
+  overflow: hidden;
+  padding: 0;
+  position: relative; /* Để định vị sidebar */
+  transition: padding-right 0.3s ease; /* Hiệu ứng đẩy nội dung */
+}
+
+/* --- HEADER CÔNG CỤ --- */
+.reading-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.reading-header .back-link {
+  text-decoration: none;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reading-header .back-link i {
+  font-size: 16px;
+}
+
+.reading-tools {
+  display: flex;
+  gap: 20px;
+}
+
+/* Ẩn tools header khi mở sidebar */
+.toc-open .reading-header .reading-tools {
+  display: none;
+}
+
+.tool-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 24px;
+  color: #333;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  transition: all 0.2s;
+}
+.tool-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.icon-plus-mini {
+  position: absolute;
+  font-size: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  pointer-events: none;
+}
+.tool-btn .fa-bookmark {
+  font-weight: 400;
+}
+
+/* --- KHUNG ĐỌC SÁCH --- */
+.reading-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  transition: padding-right 0.3s ease; /* Hiệu ứng đẩy lùi khi mở sidebar */
+}
+
+/* Khi mở sidebar, đẩy nội dung sang trái một chút */
+.toc-open .reading-wrapper {
+  padding-right: 390px; /* 350px sidebar + 40px padding */
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #333;
+  cursor: pointer;
+  padding: 20px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.nav-arrow:hover {
+  opacity: 1;
+}
+.nav-arrow.prev {
+  margin-right: 30px;
+}
+.nav-arrow.next {
+  margin-left: 30px;
+}
+
+.book-page-content {
+  width: 1000px;
+  max-width: 90%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+}
+
+/* Khi mở sidebar, thu nhỏ vùng đọc */
+.toc-open .book-page-content {
+  width: 800px;
+}
+
+.chapter-header {
+  text-align: center;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+}
+.chapter-header h2 {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 8px;
+}
+.chapter-header h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #111;
+}
+
+.text-columns {
+  column-count: 2;
+  column-gap: 80px;
+  font-family: "Merriweather", serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
+  flex: 1;
+  overflow: hidden;
+  transition: column-gap 0.3s ease;
+}
+
+/* Giảm khoảng cách cột khi mở sidebar */
+.toc-open .text-columns {
+  column-gap: 50px;
+}
+
+.text-columns p {
+  margin-bottom: 15px;
+  text-indent: 20px;
+}
+
+.page-number {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  padding-bottom: 20px;
+  flex-shrink: 0;
+  transition: padding-right 0.3s ease;
+}
+
+/* Đẩy số trang theo khi mở sidebar */
+.toc-open .page-number {
+  padding-right: 350px;
+}
+
+/* --- SIDEBAR MỤC LỤC (BÊN PHẢI) --- */
+.toc-sidebar {
+  position: absolute;
+  top: 0;
+  right: -350px; /* Ẩn bên ngoài màn hình */
+  width: 350px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease; /* Hiệu ứng trượt ra */
+  z-index: 100;
+}
+
+/* Hiển thị sidebar khi có class toc-open */
+.toc-open .toc-sidebar {
+  right: 0;
+}
+
+/* Header trong sidebar */
+.toc-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+/* Style nút Active (Màu đỏ) */
+.tool-btn.active {
+  background-color: #ff6b6b;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+.tool-btn.active .icon-plus-mini {
+  color: white;
+}
+
+.toc-list-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 30px;
+}
+/* Scrollbar đẹp */
+.toc-list-container::-webkit-scrollbar {
+  width: 5px;
+}
+.toc-list-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-list li {
+  margin-bottom: 25px;
+}
+.toc-list a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: block;
+  line-height: 1.5;
+}
+.toc-list a:hover {
+  color: #ff6b6b;
+}

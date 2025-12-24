@@ -1,0 +1,83 @@
+/* --- CSS CHO TRANG LƯU TRỮ --- */
+
+.storage-page {
+  padding-bottom: 50px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #222;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #ddd; /* Đường kẻ đứt nét nhẹ dưới tiêu đề */
+  display: inline-block; /* Để đường kẻ chỉ dài bằng chữ */
+  width: 100%; /* Hoặc full width nếu muốn kẻ hết dòng */
+}
+
+/* Lưới sách */
+.storage-grid {
+  display: flex;
+  gap: 40px; /* Khoảng cách giữa các sách rộng hơn chút */
+  flex-wrap: wrap; /* Tự xuống dòng nếu nhiều sách */
+  margin-bottom: 100px; /* Đẩy footer xuống xa */
+}
+
+/* Tinh chỉnh lại card sách cho trang này nếu cần */
+.book-card {
+  width: 180px; /* Cố định chiều rộng */
+  cursor: pointer;
+}
+
+/* --- XỬ LÝ ICON NỔI TRÊN ẢNH --- */
+.book-cover {
+  position: relative; /* Quan trọng: để định vị icon con bên trong */
+  overflow: hidden; /* Bo góc ảnh */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Class chung cho icon nổi */
+.icon-overlay {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  font-size: 28px; /* Kích thước icon to */
+  filter: drop-shadow(
+    0 2px 4px rgba(0, 0, 0, 0.3)
+  ); /* Đổ bóng nhẹ cho icon nổi bật */
+}
+
+/* Icon Trái tim (Màu đỏ) */
+.icon-overlay.heart {
+  color: #ff4d4f;
+  top: 10px; /* Cách mép trên một chút */
+}
+
+/* Icon Bookmark (Màu vàng) */
+.icon-overlay.bookmark {
+  color: #ffc107;
+  top: -5px; /* Bookmark thường treo sát mép trên kiểu thẻ kẹp */
+  font-size: 32px; /* Bookmark cần to hơn chút cho đẹp */
+}
+
+.book-card .title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.book-card .author {
+  font-size: 13px;
+  color: #666;
+}

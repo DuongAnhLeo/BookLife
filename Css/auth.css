@@ -1,0 +1,234 @@
+/* --- CẤU HÌNH CƠ BẢN --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f1ea; /* Màu nền kem đồng bộ với App */
+  height: 100vh;
+  display: flex;
+  align-items: center; /* Căn giữa dọc */
+  justify-content: center; /* Căn giữa ngang */
+  padding: 20px;
+}
+
+/* --- KHUNG CHỨA (CARD) --- */
+.auth-container {
+  background-color: #ffffff;
+  width: 420px;
+  padding: 40px;
+  border-radius: 20px; /* Bo góc tròn trịa */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+  text-align: center;
+}
+
+/* --- HEADER --- */
+.auth-header {
+  margin-bottom: 30px;
+}
+
+.auth-header .logo {
+  height: 50px; /* Kích thước logo */
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.auth-header h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.auth-header p {
+  font-size: 14px;
+  color: #888;
+}
+
+/* --- FORM & INPUT --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 40px; /* Padding trái chừa chỗ cho icon */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s;
+  background-color: #f9f9f9;
+}
+
+.input-group input:focus {
+  border-color: #0099ff; /* Màu xanh chủ đạo */
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+}
+
+/* Icon bên trái input */
+.input-group .icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 16px;
+}
+
+/* Icon mắt (Hiện pass) bên phải */
+.input-group .show-pass {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* --- TÙY CHỌN (Ghi nhớ, Quên MK) --- */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #555;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.forgot-pass {
+  text-decoration: none;
+  color: #0099ff;
+  font-weight: 600;
+}
+
+.form-options.policy {
+  justify-content: flex-start; /* Căn trái cho trang đăng ký */
+  text-align: left;
+}
+.form-options.policy a {
+  color: #0099ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* --- NÚT SUBMIT --- */
+.btn-submit {
+  background-color: #0099ff; /* Màu xanh giống các nút Đọc sách */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.btn-submit:hover {
+  background-color: #0088cc;
+}
+
+/* --- PHÂN CÁCH --- */
+.divider {
+  margin: 25px 0;
+  position: relative;
+  text-align: center;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  z-index: 0;
+}
+
+.divider span {
+  background-color: #fff;
+  padding: 0 10px;
+  color: #888;
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- SOCIAL LOGIN --- */
+.social-login {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-social {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.btn-social:hover {
+  background-color: #f5f5f5;
+}
+
+.btn-social.google {
+  color: #db4437;
+  border-color: #eee;
+}
+.btn-social.facebook {
+  color: #4267b2;
+  border-color: #eee;
+}
+
+/* --- FOOTER (Chuyển đổi Đăng nhập/Đăng ký) --- */
+.auth-footer {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-footer a {
+  color: #0099ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 480px) {
+  .auth-container {
+    width: 100%;
+    padding: 30px 20px;
+  }
+}

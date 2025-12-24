@@ -1,0 +1,640 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123",
+      "fullName": "Quản Trị Viên",
+      "email": "admin@booklife.com",
+      "role": "admin",
+      "favorites": [],
+      "bookmarks": [],
+      "history": [
+        1,
+        48
+      ]
+    },
+    {
+      "id": "eda5",
+      "username": "duonganh7805",
+      "password": "duonganh",
+      "fullName": "Dương Anh",
+      "email": "duonganh7805@gmail.com",
+      "role": "user",
+      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg",
+      "favorites": [
+        49,
+        1,
+        10,
+        47
+      ],
+      "history": [
+        1,
+        50,
+        48,
+        47,
+        4,
+        7
+      ],
+      "bookmarks": [
+        1,
+        7,
+        40,
+        47
+      ]
+    },
+    {
+      "id": "4213",
+      "username": "phuchung",
+      "password": "123456",
+      "fullName": "Nguyễn Phúc Hưng",
+      "email": "phuchung@gmail.com",
+      "role": "user",
+      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg",
+      "favorites": [],
+      "history": [
+        48,
+        47
+      ],
+      "bookmarks": [
+        49
+      ]
+    },
+    {
+      "id": "db79",
+      "fullName": "Cao Văn Thận",
+      "email": "vanthan@gmail.com",
+      "password": "123",
+      "role": "user",
+      "favorites": [],
+      "history": [],
+      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg"
+    },
+    {
+      "id": "7c61",
+      "fullName": "Bùi Đạt",
+      "email": "buidat@gmail.com",
+      "password": "123",
+      "role": "user",
+      "favorites": [],
+      "history": []
+    }
+  ],
+  "stories": [
+    {
+      "id": "1",
+      "title": "101 cách cua đổ đại lão hàng xóm",
+      "author": "Đồng Vu",
+      "cover": "./Image/363cc075df84905c5ba0e8c944565c34f529e7d5.jpg",
+      "description": "Câu chuyện tình yêu hài hước...",
+      "status": "Đang ra",
+      "views": 2500,
+      "rating": 4.8,
+      "categoryId": "2"
+    },
+    {
+      "id": "2",
+      "title": "Tỉnh giấc bỗng trở thành hung thủ",
+      "author": "Vô Hỉ",
+      "cover": "./Image/37bb6bdac5df800cc084ca6562d123fbac228ed7.png",
+      "description": "Trinh thám ly kỳ...",
+      "status": "Hoàn thành",
+      "views": 1200,
+      "rating": 4.2
+    },
+    {
+      "id": "3",
+      "title": "Ác quỷ khoác áo blouse",
+      "author": "Lê Bảo Ngọc",
+      "cover": "./Image/24dd0d6dae6e9bb98d3e9f17b4abb263789ac770.jpg",
+      "description": "Câu chuyện ngành y đầy kịch tính...",
+      "status": "Đang ra",
+      "views": 1800,
+      "rating": 4.6
+    },
+    {
+      "id": "4",
+      "title": "Khi anh chạy về phía em",
+      "author": "Trúc Dĩ",
+      "cover": "./Image/80b4fbc27a529b2f79800342116ff56d06e74e26.jpg",
+      "description": "Thanh xuân vườn trường ngọt ngào...",
+      "status": "Hoàn thành",
+      "views": 3200,
+      "rating": 4.9
+    },
+    {
+      "id": "5",
+      "title": "Khởi nguồn phúc lạc",
+      "author": "Vũ Pháp Như (biên soạn)",
+      "cover": "./Image/c31cb0f0fe62e187525d00505871b88ccc9ebe8b.jpg",
+      "description": "Sách tôn giáo, tâm linh...",
+      "status": "Hoàn thành",
+      "views": 500,
+      "rating": 4
+    },
+    {
+      "id": "6",
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoevsky",
+      "cover": "./Image/b50d203a8167758daf897cb8ed1599e5b85f2176.jpg",
+      "description": "Kiệt tác văn học Nga...",
+      "status": "Hoàn thành",
+      "views": 800,
+      "rating": 5
+    },
+    {
+      "id": "7",
+      "title": "Dám nghĩ lớn",
+      "author": "David T. Schwartz",
+      "cover": "./Image/b33e48be08f13894133b48bdf2bea61931fd0713.jpg",
+      "description": "Sách kỹ năng sống...",
+      "status": "Hoàn thành",
+      "views": 4000,
+      "rating": 4.7
+    },
+    {
+      "id": "8",
+      "title": "Dọn nhà, dọn cửa, gột rửa trái tim",
+      "author": "Shoukei Matsumoto",
+      "cover": "./Image/03b81bc81dc8d4a7591888a878f8dd10c81e723b.jpg",
+      "description": "Sống tối giản...",
+      "status": "Hoàn thành",
+      "views": 1500,
+      "rating": 4.3
+    },
+    {
+      "id": "9",
+      "title": "Vượt qua hội chứng tự kỷ",
+      "author": "Raun K. Kaufman",
+      "cover": "./Image/a84bcc9c5fb11684dcef63669bc6781d7674141d.jpg",
+      "description": "Sách y học, giáo dục...",
+      "status": "Hoàn thành",
+      "views": 600,
+      "rating": 4.5
+    },
+    {
+      "id": "10",
+      "title": "Thần số học - Thấu hiểu nhân tâm",
+      "author": "Tống Khánh Thượng",
+      "cover": "./Image/ec47d5c8481d8bd86fd3041f154422a6a591e92a.jpg",
+      "description": "Khoa học huyền bí...",
+      "status": "Hoàn thành",
+      "views": 2200,
+      "rating": 3.9
+    },
+    {
+      "id": "11",
+      "title": "Dạy con đôi khi thật đơn giản",
+      "author": "Trần Bích Hà",
+      "cover": "./Image/63f8682d5b990086b1f8f9000c90af9b4b7002d9.jpg",
+      "description": "Sách nuôi dạy con...",
+      "status": "Hoàn thành",
+      "views": 900,
+      "rating": 4.1
+    },
+    {
+      "id": "12",
+      "title": "Nhịn khô",
+      "author": "Sergey Filonov",
+      "cover": "./Image/2ff753395cd8efecd4fb373329f58ece795e6f56.jpg",
+      "description": "Phương pháp thanh lọc cơ thể...",
+      "status": "Hoàn thành",
+      "views": 1100,
+      "rating": 4
+    },
+    {
+      "id": "13",
+      "title": "Đẹp thế sao chìm nổi",
+      "author": "Khuynh An Noãn Hạ",
+      "cover": "./Image/b6fdfb568623d5f3b97baf427b675a0fe352ca06.png",
+      "description": "Tiểu thuyết ngôn tình...",
+      "status": "Hoàn thành",
+      "views": 1300,
+      "rating": 4.4
+    },
+    {
+      "id": "14",
+      "title": "Phượng hồ",
+      "author": "Phượng Khinh",
+      "cover": "./Image/df4755cca8ebf8bece7047ee286399dcd2452b4b.jpg",
+      "description": "Cổ đại, cung đấu...",
+      "status": "Hoàn thành",
+      "views": 2100,
+      "rating": 4.6
+    },
+    {
+      "id": "15",
+      "title": "Anh đến cùng ánh sao trời",
+      "author": "Bắc Phong Vị Miên",
+      "cover": "./Image/a2cf86585bc83e35d5b58b79a569ab7809bf0037.jpg",
+      "description": "Hiện đại, sủng...",
+      "status": "Hoàn thành",
+      "views": 2800,
+      "rating": 4.8
+    },
+    {
+      "id": "16",
+      "title": "Phu quân Phật hệ học hư rồi",
+      "author": "Tam Mộc Du Du",
+      "cover": "./Image/fe00f45b6bc46c0f569bfc6fa9a12c87782a86bb.jpg",
+      "description": "Hài hước, cổ đại...",
+      "status": "Đang ra",
+      "views": 1400,
+      "rating": 4.3
+    },
+    {
+      "id": "17",
+      "title": "Thái tử nhập vai",
+      "author": "Ám Hương",
+      "cover": "./Image/af73ecd2d043652d1fa9ea0a9e8b56f9336f3355.png",
+      "description": "Cung đấu kịch tính...",
+      "status": "Đang ra",
+      "views": 1600,
+      "rating": 4.5
+    },
+    {
+      "id": "18",
+      "title": "Cực hạn mê đắm",
+      "author": "Thời Kinh Kinh",
+      "cover": "./Image/8375393fda5af4f1de4b760820eb1417ba1b618e.png",
+      "description": "Ngôn tình hắc bang...",
+      "status": "Hoàn thành",
+      "views": 1900,
+      "rating": 4.2
+    },
+    {
+      "id": "19",
+      "title": "Thiếu soái, chào anh!",
+      "author": "Ngỗng Trời Xù Lông",
+      "cover": "./Image/2ff1283584938b949a8869922302178477e8806b.png",
+      "description": "Dân quốc, quân nhân...",
+      "status": "Hoàn thành",
+      "views": 2400,
+      "rating": 4.7
+    },
+    {
+      "id": "20",
+      "title": "Kim phấn",
+      "author": "Thanh Đồng Tuệ",
+      "cover": "./Image/fb391c8ae5d36bad8c26926d09fd2f73e72b3fbb.png",
+      "description": "Gia đấu, hào môn...",
+      "status": "Đang ra",
+      "views": 1750,
+      "rating": 4.5
+    },
+    {
+      "id": "21",
+      "title": "Sống lại trở thành đại lão giới khoa học",
+      "author": "Du Nhân",
+      "cover": "./Image/4ec6097b2815f8b2af282ed0b6621da865643f89.png",
+      "description": "Trùng sinh, nữ cường...",
+      "status": "Đang ra",
+      "views": 2600,
+      "rating": 4.6
+    },
+    {
+      "id": "22",
+      "title": "Lấy chàng kỹ sư",
+      "author": "Đức Âm Bất Vong",
+      "cover": "./Image/85c2511dbe38b48433d447e1d92545b988afdf89.png",
+      "description": "Hiện đại, nhẹ nhàng...",
+      "status": "Hoàn thành",
+      "views": 950,
+      "rating": 4.1
+    },
+    {
+      "id": "23",
+      "title": "Xuyên nhanh - Cứu rỗi nam phụ",
+      "author": "Cổn Kim",
+      "cover": "./Image/1fbc37a13749961ddc803e6b79599d3e56180e98.jpg",
+      "description": "Hệ thống, xuyên nhanh...",
+      "status": "Đang ra",
+      "views": 3100,
+      "rating": 4.7
+    },
+    {
+      "id": "24",
+      "title": "30 tuổi mọi thứ chỉ mới bắt đầu",
+      "author": "Lý Thượng Long",
+      "cover": "./Image/4bfd0fec6eb0e5283e190a42bb005ae3d84099cb.jpg",
+      "description": "Sách kỹ năng...",
+      "status": "Hoàn thành",
+      "views": 1250,
+      "rating": 4.4
+    },
+    {
+      "id": "25",
+      "title": "Stop overthinking - Sống tự do",
+      "author": "Chase Hill, Scott Sharp",
+      "cover": "./Image/476d7b0cdc49b4edeced1291d04844dbd68faaf7.jpg",
+      "description": "Tâm lý học...",
+      "status": "Hoàn thành",
+      "views": 3500,
+      "rating": 4.8
+    },
+    {
+      "id": "26",
+      "title": "Content và nghệ thuật storytelling",
+      "author": "OOPSY",
+      "cover": "./Image/097fe7cacad419784336d66d9f27e8ca75bbc22d.jpg",
+      "description": "Marketing, viết lách...",
+      "status": "Hoàn thành",
+      "views": 700,
+      "rating": 4.2
+    },
+    {
+      "id": "27",
+      "title": "Nhà Giả Kim",
+      "author": "Paulo Coelho",
+      "cover": "./Image/363cc075df84905c5ba0e8c944565c34f529e7d5.jpg",
+      "description": "Hành trình theo đuổi vận mệnh...",
+      "status": "Hoàn thành",
+      "views": 5000,
+      "rating": 5
+    },
+    {
+      "id": "28",
+      "title": "Đắc Nhân Tâm",
+      "author": "Dale Carnegie",
+      "cover": "./Image/b33e48be08f13894133b48bdf2bea61931fd0713.jpg",
+      "description": "Nghệ thuật thu phục lòng người...",
+      "status": "Hoàn thành",
+      "views": 4800,
+      "rating": 4.9
+    },
+    {
+      "id": "29",
+      "title": "Tuổi trẻ đáng giá bao nhiêu",
+      "author": "Rosie Nguyễn",
+      "cover": "./Image/63f8682d5b990086b1f8f9000c90af9b4b7002d9.jpg",
+      "description": "Sách cho người trẻ...",
+      "status": "Hoàn thành",
+      "views": 3500,
+      "rating": 4.5
+    },
+    {
+      "id": "30",
+      "title": "Sherlock Holmes: Tập 1",
+      "author": "Conan Doyle",
+      "cover": "./Image/37bb6bdac5df800cc084ca6562d123fbac228ed7.png",
+      "description": "Thám tử lừng danh...",
+      "status": "Hoàn thành",
+      "views": 4200,
+      "rating": 4.8
+    },
+    {
+      "id": "31",
+      "title": "Harry Potter và Hòn đá phù thủy",
+      "author": "J.K. Rowling",
+      "cover": "./Image/fe00f45b6bc46c0f569bfc6fa9a12c87782a86bb.jpg",
+      "description": "Thế giới phép thuật kỳ diệu...",
+      "status": "Hoàn thành",
+      "views": 6000,
+      "rating": 5
+    },
+    {
+      "id": "32",
+      "title": "Cà phê cùng Tony",
+      "author": "Tony Buổi Sáng",
+      "cover": "./Image/4bfd0fec6eb0e5283e190a42bb005ae3d84099cb.jpg",
+      "description": "Chuyện đời chuyện nghề...",
+      "status": "Hoàn thành",
+      "views": 2900,
+      "rating": 4.4
+    },
+    {
+      "id": "33",
+      "title": "Lược sử loài người",
+      "author": "Yuval Noah Harari",
+      "cover": "./Image/b50d203a8167758daf897cb8ed1599e5b85f2176.jpg",
+      "description": "Lịch sử văn minh nhân loại...",
+      "status": "Hoàn thành",
+      "views": 2100,
+      "rating": 4.7
+    },
+    {
+      "id": "34",
+      "title": "Bên nhau trọn đời",
+      "author": "Cố Mạn",
+      "cover": "./Image/80b4fbc27a529b2f79800342116ff56d06e74e26.jpg",
+      "description": "Tình yêu vượt thời gian...",
+      "status": "Hoàn thành",
+      "views": 3800,
+      "rating": 4.6
+    },
+    {
+      "id": "35",
+      "title": "Yêu em từ cái nhìn đầu tiên",
+      "author": "Cố Mạn",
+      "cover": "./Image/24dd0d6dae6e9bb98d3e9f17b4abb263789ac770.jpg",
+      "description": "Võng du, tình yêu game thủ...",
+      "status": "Hoàn thành",
+      "views": 3300,
+      "rating": 4.7
+    },
+    {
+      "id": "36",
+      "title": "Mắt Biếc",
+      "author": "Nguyễn Nhật Ánh",
+      "cover": "./Image/a2cf86585bc83e35d5b58b79a569ab7809bf0037.jpg",
+      "description": "Tình yêu đơn phương...",
+      "status": "Hoàn thành",
+      "views": 4100,
+      "rating": 4.8
+    },
+    {
+      "id": "37",
+      "title": "Tôi thấy hoa vàng trên cỏ xanh",
+      "author": "Nguyễn Nhật Ánh",
+      "cover": "./Image/ec47d5c8481d8bd86fd3041f154422a6a591e92a.jpg",
+      "description": "Tuổi thơ êm đềm...",
+      "status": "Hoàn thành",
+      "views": 3900,
+      "rating": 4.6
+    },
+    {
+      "id": "38",
+      "title": "Đại gia Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "cover": "./Image/c31cb0f0fe62e187525d00505871b88ccc9ebe8b.jpg",
+      "description": "Giấc mơ Mỹ...",
+      "status": "Hoàn thành",
+      "views": 1400,
+      "rating": 4.3
+    },
+    {
+      "id": "39",
+      "title": "Rừng Na Uy",
+      "author": "Haruki Murakami",
+      "cover": "./Image/df4755cca8ebf8bece7047ee286399dcd2452b4b.jpg",
+      "description": "Nỗi cô đơn và tuổi trẻ...",
+      "status": "Hoàn thành",
+      "views": 2500,
+      "rating": 4.4
+    },
+    {
+      "id": "40",
+      "title": "Hoàng tử bé",
+      "author": "Antoine de Saint-Exupéry",
+      "cover": "./Image/b6fdfb568623d5f3b97baf427b675a0fe352ca06.png",
+      "description": "Câu chuyện triết lý...",
+      "status": "Hoàn thành",
+      "views": 5500,
+      "rating": 5
+    },
+    {
+      "id": "41",
+      "title": "Ông già và biển cả",
+      "author": "Ernest Hemingway",
+      "cover": "./Image/2ff1283584938b949a8869922302178477e8806b.png",
+      "description": "Nghị lực sống phi thường...",
+      "status": "Hoàn thành",
+      "views": 1600,
+      "rating": 4.2
+    },
+    {
+      "id": "42",
+      "title": "Không gia đình",
+      "author": "Hector Malot",
+      "cover": "./Image/85c2511dbe38b48433d447e1d92545b988afdf89.png",
+      "description": "Hành trình tìm lại người thân...",
+      "status": "Hoàn thành",
+      "views": 2000,
+      "rating": 4.7
+    },
+    {
+      "id": "43",
+      "title": "Cha giàu cha nghèo",
+      "author": "Robert Kiyosaki",
+      "cover": "./Image/476d7b0cdc49b4edeced1291d04844dbd68faaf7.jpg",
+      "description": "Tư duy tài chính...",
+      "status": "Hoàn thành",
+      "views": 4700,
+      "rating": 4.6
+    },
+    {
+      "id": "44",
+      "title": "Nghĩ giàu làm giàu",
+      "author": "Napoleon Hill",
+      "cover": "./Image/097fe7cacad419784336d66d9f27e8ca75bbc22d.jpg",
+      "description": "Bí quyết thành công...",
+      "status": "Hoàn thành",
+      "views": 3100,
+      "rating": 4.5
+    },
+    {
+      "id": "45",
+      "title": "Bố già",
+      "author": "Mario Puzo",
+      "cover": "./Image/af73ecd2d043652d1fa9ea0a9e8b56f9336f3355.png",
+      "description": "Thế giới ngầm mafia...",
+      "status": "Hoàn thành",
+      "views": 3600,
+      "rating": 4.9
+    },
+    {
+      "id": "46",
+      "title": "Cuốn theo chiều gió",
+      "author": "Margaret Mitchell",
+      "cover": "./Image/fb391c8ae5d36bad8c26926d09fd2f73e72b3fbb.png",
+      "description": "Tình yêu và chiến tranh...",
+      "status": "Hoàn thành",
+      "views": 2800,
+      "rating": 4.6
+    },
+    {
+      "id": "47",
+      "title": "Kiêu hãnh và định kiến",
+      "author": "Jane Austen",
+      "cover": "./Image/1fbc37a13749961ddc803e6b79599d3e56180e98.jpg",
+      "description": "Tình yêu cổ điển...",
+      "status": "Hoàn thành",
+      "views": 2300,
+      "rating": 4.5
+    },
+    {
+      "id": "48",
+      "title": "Tiếng chim hót trong bụi mận gai",
+      "author": "Colleen McCullough",
+      "cover": "./Image/4ec6097b2815f8b2af282ed0b6621da865643f89.png",
+      "description": "Thiên tình sử bi tráng...",
+      "status": "Hoàn thành",
+      "views": 1900,
+      "rating": 4.4
+    },
+    {
+      "id": "49",
+      "title": "Hai số phận",
+      "author": "Jeffrey Archer",
+      "cover": "./Image/8375393fda5af4f1de4b760820eb1417ba1b618e.png",
+      "description": "Cuộc đời thăng trầm...",
+      "status": "Hoàn thành",
+      "views": 3400,
+      "rating": 4.8
+    },
+    {
+      "id": "50",
+      "title": "Trăm năm cô đơn",
+      "author": "Gabriel García Márquez",
+      "cover": "./Image/a84bcc9c5fb11684dcef63669bc6781d7674141d.jpg",
+      "description": "Chủ nghĩa hiện thực huyền ảo...",
+      "status": "Hoàn thành",
+      "views": 2700,
+      "rating": 4.3
+    }
+  ],
+  "chapters": [
+    {
+      "id": "1",
+      "storyId": "1",
+      "title": "Chương 1: Anh cho em uống thuốc?",
+      "content": "<p>Chung Thu Yểu muốn đính chính với cậu ta, nhưng mấp máy môi lại không biết nói gì...</p><p>Tống Cạnh Hàm nhắm mắt lại nhưng không hề ngủ...</p><p>(Nội dung demo chương 1)...</p>"
+    },
+    {
+      "id": "2",
+      "storyId": 1,
+      "title": "Chương 2: Oan gia ngõ hẹp",
+      "content": "<p>Sáng hôm sau, Chung Thu Yểu tỉnh dậy với cái đầu đau như búa bổ...</p><p>Cô nhìn sang bên cạnh, trống không...</p>"
+    },
+    {
+      "id": "3",
+      "storyId": 1,
+      "title": "Chương 3: Rung động",
+      "content": "<p>Trái tim cô đập thình thịch...</p>"
+    },
+    {
+      "id": "4",
+      "storyId": 2,
+      "title": "Chương 1: Vụ án bí ẩn",
+      "content": "<p>Trời mưa tầm tã, hiện trường vụ án bị xáo trộn...</p>"
+    },
+    {
+      "id": "c486",
+      "storyId": "1",
+      "title": "Chương 4",
+      "content": "Sơn tùng mtp"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Ngôn tình",
+      "description": "Truyện tình cảm lãng mạn"
+    },
+    {
+      "id": "2",
+      "name": "Tiên hiệp",
+      "description": "Tu tiên, huyền ảo"
+    },
+    {
+      "id": "3",
+      "name": "Trinh thám",
+      "description": "Phá án, ly kỳ"
+    },
+    {
+      "id": "e0c4",
+      "name": "Kinh Dị",
+      "description": "Jack 97\n"
+    }
+  ]
+}

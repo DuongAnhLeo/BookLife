@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch sử đọc - BookLife</title>
+    <link rel="stylesheet" href="./Css/index.css" />
+    <link rel="stylesheet" href="./Css/luutru.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="logo-icon">
+          <a href="index.html"><img src="./Image/logo.png" alt="Logo" /></a>
+        </div>
+        <nav class="menu">
+          <a href="index.html" class="menu-item"
+            ><i class="fa-solid fa-house"></i
+          ></a>
+          <a href="lichsu.html" class="menu-item active"
+            ><i class="fa-solid fa-clock-rotate-left"></i
+          ></a>
+          <a href="luutru.html" class="menu-item"
+            ><i class="fa-solid fa-download"></i
+          ></a>
+          <a href="caidat.html" class="menu-item"
+            ><i class="fa-solid fa-border-all"></i
+          ></a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-header">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm trong lịch sử..." />
+          </div>
+          <div class="user-area">
+            <div class="user-profile">
+              <img src="./Image/logo.png" alt="Avatar" id="header-avatar" />
+              <span class="username" id="header-username">...</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="scroll-container storage-page">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h2 class="page-title">LỊCH SỬ ĐỌC</h2>
+            <button
+              onclick="clearAllHistory()"
+              style="
+                background: none;
+                border: 1px solid #ff4d4f;
+                color: #ff4d4f;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <i class="fa-solid fa-trash"></i> Xóa lịch sử
+            </button>
+          </div>
+
+          <div class="storage-grid" id="history-grid">
+            <p>Đang tải lịch sử...</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="./JavaScript/lichsu.js"></script>
+  </body>
+</html>

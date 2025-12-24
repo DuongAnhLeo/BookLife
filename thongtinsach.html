@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thông Tin Sách</title>
-    <link rel="stylesheet" href="thongtinsach.css" />
-    <link rel="stylesheet" href="index.css" />
+    <title>Thông Tin Sách - BookLife</title>
+    <link rel="stylesheet" href="./Css/index.css" />
+    <link rel="stylesheet" href="./Css/thongtinsach.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -15,25 +15,29 @@
     <div class="layout">
       <aside class="sidebar">
         <div class="logo-icon">
-          <img src="./Image/logo.png" alt="" />
+          <a href="index.html"><img src="./Image/logo.png" alt="Logo" /></a>
         </div>
-
         <nav class="menu">
-          <a href="#" class="menu-item active">
+          <a href="index.html" class="menu-item" title="Trang chủ">
             <i class="fa-solid fa-house"></i>
           </a>
-
-          <a href="#" class="menu-item">
+          <a href="lichsu.html" class="menu-item" title="Lịch sử đọc">
             <i class="fa-solid fa-clock-rotate-left"></i>
           </a>
-
-          <a href="#" class="menu-item">
+          <a href="luutru.html" class="menu-item" title="Sách đã lưu">
             <i class="fa-solid fa-download"></i>
           </a>
-
-          <a href="#" class="menu-item">
+          <a href="caidat.html" class="menu-item" title="Cài đặt">
             <i class="fa-solid fa-border-all"></i>
           </a>
+          <div
+            id="btn-logout"
+            class="menu-item"
+            title="Đăng xuất"
+            style="cursor: pointer; margin-top: auto; margin-bottom: 20px"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </div>
         </nav>
       </aside>
 
@@ -41,29 +45,29 @@
         <header class="top-header">
           <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Tìm sách, tên tác giả..." />
+            <input type="text" placeholder="Tìm sách..." />
           </div>
-
           <div class="user-area">
-            <div class="lang-switch">
-              <span>VN</span>
+            <div class="user-profile" id="user-action">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
-                alt="VN Flag"
-                class="flag-icon"
-              />
-            </div>
-
-            <div class="user-profile">
-              <img
-                src="./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg"
+                id="header-avatar"
+                src="./Image/logo.png"
                 alt="Avatar"
+                style="
+                  width: 35px;
+                  height: 35px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                "
               />
-              <span class="username">Duong Anh</span>
-            </div>
-
-            <div class="notification">
-              <i class="fa-regular fa-bell"></i>
+              <a
+                href="caidat.html"
+                id="header-username"
+                class="username"
+                style="text-decoration: none; color: inherit"
+              >
+                Loading...
+              </a>
             </div>
           </div>
         </header>
@@ -75,140 +79,128 @@
             </a>
           </div>
 
-          <div class="book-detail-container">
+          <div class="book-detail-container" id="book-detail-content">
             <div class="book-cover-large">
               <img
-                src="./Image/363cc075df84905c5ba0e8c944565c34f529e7d5.jpg"
-                alt="101 cách cua đổ đại lão"
+                id="book-cover"
+                src=""
+                alt="Cover"
+                onerror="this.src='https://via.placeholder.com/300x450?text=Loading...'"
               />
             </div>
 
             <div class="book-info">
-              <h1 class="book-title-large">101 cách cua đổ đại lão hàng xóm</h1>
+              <h1 class="book-title-large" id="book-title">Đang tải...</h1>
 
               <div class="rating-row">
-                <span class="score">4</span>
+                <span class="score" id="book-rating">0.0</span>
                 <div class="stars">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-solid fa-star" style="color: gold"></i>
                 </div>
-                <span class="review-count">• 1 đánh giá</span>
+                <span class="review-count" id="book-views">• 0 lượt xem</span>
               </div>
 
               <div class="meta-grid">
                 <div class="meta-item">
                   <span class="label">Tác giả</span>
-                  <span class="value">Đồng Vu</span>
+                  <span class="value" id="book-author">...</span>
                 </div>
                 <div class="meta-item">
-                  <span class="label">Thể loại</span>
-                  <span class="value">Ngôn tình</span>
-                </div>
-                <div class="meta-item">
-                  <span class="label">Nhà xuất bản</span>
-                  <span class="value">Đang cập nhật</span>
-                </div>
-                <div class="meta-item">
-                  <span class="label">Tình trạng ra</span>
-                  <span class="value">25/50</span>
+                  <span class="label">Trạng thái</span>
+                  <span class="value" id="book-status">...</span>
                 </div>
               </div>
 
               <div class="action-row">
-                <button class="btn-read">
-                  <i class="fa-solid fa-book-open"></i> Đọc sách
-                </button>
+                <a
+                  href="#"
+                  id="btn-read-link"
+                  class="btn-read"
+                  style="
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <i
+                    class="fa-solid fa-book-open"
+                    style="margin-right: 8px"
+                  ></i>
+                  Đọc sách
+                </a>
+
                 <div class="icon-actions">
-                  <i class="fa-regular fa-bookmark"></i>
-                  <i class="fa-regular fa-heart"></i>
-                  <i class="fa-solid fa-share-nodes"></i>
+                  <i
+                    class="fa-regular fa-bookmark"
+                    id="btn-save"
+                    title="Lưu vào kho"
+                    style="cursor: pointer"
+                  ></i>
+
+                  <i class="fa-regular fa-heart" title="Yêu thích"></i>
+                  <i class="fa-solid fa-share-nodes" title="Chia sẻ"></i>
                 </div>
               </div>
 
               <div class="book-description">
-                <p>
-                  Tống Thiên Thị luôn cảm thấy hàng xóm mới tới là người không
-                  dễ sống chung, bởi hắn không chỉ lạnh lùng mà lời nói ra cũng
-                  chẳng dễ lọt tai. Mãi cho đến một ngày cô bị hàng xóm chặn
-                  trên hành lang. <br />
-                  Đôi mắt của luật sư Ôn sáng quắc: "Trăm nhân ắt có quả, tôi
-                  chính là quả của em." <br />
-                  Tống Thiên Thị nhìn người đàn ông ăn mặc chỉnh tề trước mặt,
-                  đột nhiên thay đổi quan điểm về anh.
-                  <br />...
-                </p>
-                <a href="#" class="see-more">Xem thêm</a>
+                <p id="book-desc">Đang tải nội dung...</p>
               </div>
             </div>
           </div>
 
-          <div class="comments-section">
-            <h3>Bình luận (1)</h3>
-
-            <div class="comment-item">
+          <div
+            class="comments-section"
+            style="margin-top: 30px; padding: 0 40px"
+          >
+            <h3>Bình luận</h3>
+            <div
+              class="comment-item"
+              style="display: flex; gap: 15px; margin-top: 15px"
+            >
               <div class="comment-avatar">
                 <img
-                  src="./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg"
+                  src="./Image/logo.png"
                   alt="User"
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                  "
                 />
               </div>
               <div class="comment-content">
-                <div class="comment-header">
-                  <span class="comment-author">Duong Anh</span>
-                  <span class="comment-time">11:22 PM</span>
+                <div class="comment-header" style="margin-bottom: 5px">
+                  <span
+                    class="comment-author"
+                    style="font-weight: bold; font-size: 14px"
+                    >Người dùng mẫu</span
+                  >
+                  <span
+                    class="comment-time"
+                    style="font-size: 12px; color: #888; margin-left: 10px"
+                    >Vừa xong</span
+                  >
                 </div>
-                <p class="comment-text">AMAZING!!!</p>
+                <p class="comment-text" style="font-size: 14px; color: #444">
+                  Truyện hay quá, hóng chương mới!
+                </p>
               </div>
             </div>
           </div>
 
           <footer class="site-footer">
-            <div class="footer-top">
-              <div class="footer-col brand-col">
-                <div class="footer-logo">
-                  <img src="Image/logo.png" alt="logo" />
-                </div>
-                <p class="footer-desc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-              <div class="footer-col">
-                <h4>Services</h4>
-                <a href="#">Email Marketing</a>
-                <a href="#">Campaigns</a>
-                <a href="#">Branding</a>
-                <a href="#">Offline</a>
-              </div>
-              <div class="footer-col">
-                <h4>About</h4>
-                <a href="#">Our Story</a>
-                <a href="#">Benefits</a>
-                <a href="#">Team</a>
-                <a href="#">Careers</a>
-              </div>
-              <div class="footer-col social-col">
-                <h4>Follow Us</h4>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-                <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
-                <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-              </div>
-            </div>
             <div class="footer-bottom">
               <p class="copyright">
-                Copyright © 2020. LogoIpsum. All rights reserved.
+                Copyright © 2020. BookLife. All rights reserved.
               </p>
-              <div class="footer-legal">
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Privacy Policy</a>
-              </div>
             </div>
           </footer>
         </div>
       </main>
     </div>
+
+    <script src="./JavaScript/thongtinsach.js"></script>
   </body>
 </html>

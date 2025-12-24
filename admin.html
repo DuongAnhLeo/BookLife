@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookLife - Quản trị viên</title>
+    <link rel="stylesheet" href="./css/admin.css" />
+    <style>
+      /* CSS cho Modal Quản lý Chương */
+      .chapter-layout {
+        display: flex;
+        height: 500px;
+        gap: 20px;
+      }
+      .chapter-list-sidebar {
+        flex: 1;
+        border-right: 1px solid #eee;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+      .chapter-editor {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .chapter-item {
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chapter-item:hover {
+        background-color: #f9f9f9;
+      }
+      .chapter-item.active {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        font-weight: bold;
+      }
+
+      .btn-small {
+        padding: 4px 8px;
+        font-size: 12px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-red {
+        background: #ffebee;
+        color: #d32f2f;
+      }
+
+      #editor-content {
+        flex: 1;
+        resize: none;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="admin-layout">
+      <div class="admin-sidebar">
+        <div class="logo-area">
+          <i class="fa-solid fa-book-open"></i>
+          <span>ADMIN PANEL</span>
+        </div>
+        <ul class="admin-menu">
+          <li class="active" id="menu-stories">
+            <a href="#" onclick="switchTab('stories')"
+              ><i class="fa-solid fa-layer-group"></i> Quản lý Sách</a
+            >
+          </li>
+          <li id="menu-users">
+            <a href="#" onclick="switchTab('users')"
+              ><i class="fa-solid fa-users"></i> Quản lý Tài khoản</a
+            >
+          </li>
+          <li id="menu-categories">
+            <a href="#" onclick="switchTab('categories')"
+              ><i class="fa-solid fa-list"></i> Quản lý Danh mục</a
+            >
+          </li>
+          <li>
+            <a href="index.html"
+              ><i class="fa-solid fa-house"></i> Về trang chủ</a
+            >
+          </li>
+        </ul>
+        <div class="admin-logout" id="btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <div class="content-header">
+          <h2 id="welcome-msg">Xin chào, Admin</h2>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #e3f2fd; color: #1976d2">
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Tổng số sách</h3>
+              <p id="total-books">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #e8f5e9; color: #2e7d32">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Lượt xem</h3>
+              <p id="total-views">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #fff3e0; color: #ef6c00">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Thành viên</h3>
+              <p id="total-users">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-stories" class="tab-section">
+          <div class="table-container">
+            <div class="table-header">
+              <h3>Danh sách truyện</h3>
+              <div style="display: flex; gap: 10px; align-items: center">
+                <div class="search-box">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input
+                    type="text"
+                    id="search-story"
+                    placeholder="Tìm tên sách..."
+                  />
+                </div>
+                <button class="btn-primary" onclick="openModal()">
+                  <i class="fa-solid fa-plus"></i> Thêm sách
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 50px">ID</th>
+                    <th style="width: 60px">Ảnh</th>
+                    <th>Tên sách</th>
+                    <th>Danh mục</th>
+                    <th>Tác giả</th>
+                    <th>Trạng thái</th>
+                    <th style="text-align: right">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="book-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-users" class="tab-section" style="display: none">
+          <div class="table-container">
+            <div class="table-header">
+              <h3>Danh sách tài khoản</h3>
+              <button class="btn-primary" onclick="openUserModal()">
+                <i class="fa-solid fa-user-plus"></i> Thêm User
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th style="text-align: right">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-categories" class="tab-section" style="display: none">
+          <div class="table-container">
+            <div class="table-header">
+              <h3>Danh sách danh mục</h3>
+              <button class="btn-primary" onclick="openCategoryModal()">
+                <i class="fa-solid fa-folder-plus"></i> Thêm Danh mục
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 100px">ID</th>
+                    <th>Tên danh mục</th>
+                    <th>Mô tả</th>
+                    <th style="text-align: right">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="category-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bookModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Thêm sách mới</h3>
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="book-form">
+            <input type="hidden" id="book-id" />
+            <div class="form-row">
+              <div class="form-group" style="flex: 2">
+                <label>Tên sách</label
+                ><input
+                  type="text"
+                  id="title"
+                  required
+                  placeholder="Nhập tên sách..."
+                />
+              </div>
+              <div class="form-group" style="flex: 1">
+                <label>Danh mục</label
+                ><select id="story-category" required>
+                  <option value="">-- Chọn --</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Tác giả</label><input type="text" id="author" required />
+              </div>
+              <div class="form-group">
+                <label>Trạng thái</label
+                ><select id="status">
+                  <option value="Đang ra">Đang ra</option>
+                  <option value="Hoàn thành">Hoàn thành</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Link ảnh bìa (URL)</label>
+              <div style="display: flex; gap: 10px; align-items: center">
+                <input
+                  type="text"
+                  id="cover"
+                  placeholder="./Image/..."
+                  style="flex: 1"
+                /><img
+                  src=""
+                  id="preview-img"
+                  style="
+                    display: none;
+                    width: 40px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    border: 1px solid #ddd;
+                  "
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mô tả ngắn</label
+              ><textarea id="description" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeModal()"
+              >
+                Hủy</button
+              ><button type="submit" class="btn-primary">Lưu lại</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="userModal" class="modal">
+      <div class="modal-content" style="width: 400px">
+        <div class="modal-header">
+          <h3 id="user-modal-title">Thêm tài khoản</h3>
+          <span class="close-btn" onclick="closeUserModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="user-form">
+            <input type="hidden" id="user-id" />
+            <div class="form-group">
+              <label>Họ và tên</label
+              ><input type="text" id="user-fullname" required />
+            </div>
+            <div class="form-group">
+              <label>Email</label
+              ><input type="email" id="user-email" required />
+            </div>
+            <div class="form-group">
+              <label>Mật khẩu</label
+              ><input type="text" id="user-password" required />
+            </div>
+            <div class="form-group">
+              <label>Vai trò</label
+              ><select id="user-role">
+                <option value="user">Người dùng (User)</option>
+                <option value="admin">Quản trị viên (Admin)</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeUserModal()"
+              >
+                Hủy</button
+              ><button type="submit" class="btn-primary">Lưu User</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="categoryModal" class="modal">
+      <div class="modal-content" style="width: 400px">
+        <div class="modal-header">
+          <h3 id="category-modal-title">Thêm danh mục</h3>
+          <span class="close-btn" onclick="closeCategoryModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="category-form">
+            <input type="hidden" id="category-id" />
+            <div class="form-group">
+              <label>Tên danh mục</label
+              ><input type="text" id="category-name" required />
+            </div>
+            <div class="form-group">
+              <label>Mô tả</label
+              ><textarea id="category-desc" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeCategoryModal()"
+              >
+                Hủy</button
+              ><button type="submit" class="btn-primary">Lưu Danh mục</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="chapterModal" class="modal">
+      <div class="modal-content" style="width: 900px; max-width: 95%">
+        <div class="modal-header">
+          <h3 id="chapter-modal-title">Quản lý Chương</h3>
+          <span class="close-btn" onclick="closeChapterModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="chapter-layout">
+            <div class="chapter-list-sidebar">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 10px;
+                "
+              >
+                <strong>Danh sách chương</strong>
+                <button
+                  class="btn-primary"
+                  style="font-size: 12px; padding: 4px 8px"
+                  onclick="resetChapterForm()"
+                >
+                  <i class="fa-solid fa-plus"></i> Mới
+                </button>
+              </div>
+              <div id="chapter-list-container">
+                <div class="chapter-item">Đang tải...</div>
+              </div>
+            </div>
+
+            <div class="chapter-editor">
+              <input type="hidden" id="current-story-id" />
+              <input type="hidden" id="current-chapter-id" />
+              <div class="form-group">
+                <label>Tiêu đề chương</label>
+                <input
+                  type="text"
+                  id="editor-title"
+                  placeholder="Ví dụ: Chương 1: Mở đầu"
+                  required
+                />
+              </div>
+              <div
+                class="form-group"
+                style="flex: 1; display: flex; flex-direction: column"
+              >
+                <label>Nội dung chương (HTML)</label>
+                <textarea
+                  id="editor-content"
+                  placeholder="Nhập nội dung truyện vào đây... (Hỗ trợ thẻ <p>, <b>...)"
+                ></textarea>
+              </div>
+              <div style="display: flex; justify-content: flex-end; gap: 10px">
+                <button class="btn-secondary" onclick="closeChapterModal()">
+                  Đóng
+                </button>
+                <button class="btn-primary" onclick="saveChapter()">
+                  Lưu Chương
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./JavaScript/admin.js"></script>
+  </body>
+</html>

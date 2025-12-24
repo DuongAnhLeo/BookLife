@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f1eee3;
+  color: #333;
+  height: 100vh;
+  overflow: hidden; /* Không cho cuộn cả trang, chỉ cuộn phần nội dung */
+}
+
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 80px;
+  height: 100%;
+  background-color: #f1eee3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  border-right: 2px solid #c9c9c9; /* Viền mờ*/
+}
+
+/* Logo icon trên cùng */
+.logo-icon {
+  font-size: 12px;
+  margin-bottom: 130px;
+  color: #333;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Khoảng cách giữa các icon */
+  width: 100%;
+  align-items: center;
+}
+
+.menu-item {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #666; /* Màu icon thường */
+  font-size: 20px;
+  transition: all 0.3s ease;
+  border-radius: 12px; /* Bo góc icon */
+}
+
+/* Trạng thái Active: Nền đỏ cam giống ảnh */
+.menu-item.active {
+  background-color: #ff6b6b; /* Màu đỏ cam */
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+.menu-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+/* --- 3. MAIN CONTENT (BÊN PHẢI) --- */
+.main-content {
+  flex: 1; /* Chiếm hết phần còn lại */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
+
+/* HEADER */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* Thanh tìm kiếm */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #555;
+  width: 400px;
+}
+
+.search-box i {
+  font-size: 18px;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  color: #333;
+}
+
+/* Khu vực User bên phải */
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.flag-icon {
+  width: 18px;
+  height: 12px;
+  object-fit: cover;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-profile .username {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* --- 4. DANH SÁCH SÁCH --- */
+.scroll-container {
+  overflow-y: auto; /* Cho phép cuộn dọc nội dung */
+  flex: 1;
+  padding-right: 10px; /* Tránh thanh cuộn dính sát nội dung */
+}
+
+/* Ẩn thanh cuộn cho đẹp */
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+.book-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline; /* Căn chân chữ */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.section-title a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666;
+}
+
+.book-list {
+  display: grid; /* Sử dụng Grid để chia cột */
+  grid-template-columns: repeat(6, 1fr); /* Bắt buộc chia 6 cột đều nhau */
+  gap: 25px; /* Khoảng cách giữa các sách */
+  padding-bottom: 50px; /* Khoảng trống dưới cùng để không bị sát đáy */
+  width: 100%;
+}
+
+/* Ẩn thanh cuộn ngang của list sách */
+.book-list::-webkit-scrollbar {
+  display: none;
+}
+
+.book-card {
+  width: 100%; /* Chiếm hết chiều rộng của cột lưới */
+  min-width: unset; /* Bỏ giới hạn chiều rộng cũ */
+  cursor: pointer;
+}
+
+.book-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.book-card a:hover .title {
+  color: #0099ff;
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Giữ tỷ lệ ảnh chuẩn (Rộng 2 / Cao 3) */
+  height: auto; /* Để chiều cao tự tính theo tỷ lệ */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  transition: transform 0.3s;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-card:hover .book-cover {
+  transform: translateY(-5px);
+}
+
+.book-card .title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card .author {
+  font-size: 12px;
+  color: #777;
+}

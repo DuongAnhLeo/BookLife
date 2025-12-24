@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đọc sách - BookLife</title>
+    <link rel="stylesheet" href="./Css/index.css" />
+    <link rel="stylesheet" href="./Css/docsach.css" />
+    <link rel="stylesheet" href="./JavaScript/thongtinsach.js" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="logo-icon">
+          <a href="index.html"><img src="./Image/logo.png" alt="Logo" /></a>
+        </div>
+        <nav class="menu">
+          <a href="index.html" class="menu-item"
+            ><i class="fa-solid fa-house"></i
+          ></a>
+          <a href="lichsu.html" class="menu-item"
+            ><i class="fa-solid fa-clock-rotate-left"></i
+          ></a>
+          <a href="luutru.html" class="menu-item active"
+            ><i class="fa-solid fa-book-open"></i
+          ></a>
+          <a href="caidat.html" class="menu-item"
+            ><i class="fa-solid fa-border-all"></i
+          ></a>
+        </nav>
+      </aside>
+
+      <main class="main-content reading-mode" id="mainContent">
+        <header class="reading-header">
+          <a href="#" id="back-link" class="back-link">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span id="story-title-header">Đang tải tên truyện...</span>
+          </a>
+
+          <div class="reading-tools">
+            <button class="tool-btn" id="btnOpenTOC" title="Mục lục">
+              <i class="fa-regular fa-clipboard"></i>
+            </button>
+            <button class="tool-btn">
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+            <button class="tool-btn">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="reading-wrapper">
+          <button class="nav-arrow prev" id="btn-prev">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="book-page-content">
+            <div class="chapter-header">
+              <h2 id="chapter-num">Chương...</h2>
+              <h1 id="chapter-title">Đang tải...</h1>
+            </div>
+
+            <div class="text-columns" id="chapter-content">
+              <p>Đang tải nội dung...</p>
+            </div>
+          </div>
+
+          <button class="nav-arrow next" id="btn-next">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="page-number" id="page-info">1/--</div>
+
+        <aside class="toc-sidebar" id="tocSidebar">
+          <div class="toc-header">
+            <button class="tool-btn active" id="btnCloseTOC">
+              <i class="fa-regular fa-clipboard"></i>
+            </button>
+          </div>
+          <div class="toc-list-container">
+            <ul class="toc-list" id="toc-list">
+              <li>Đang tải mục lục...</li>
+            </ul>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./JavaScript/docsach.js"></script>
+  </body>
+</html>
