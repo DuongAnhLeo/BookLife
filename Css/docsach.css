@@ -78,7 +78,7 @@
   max-width: 95%;
   /* Chiều cao cố định để tạo cảm giác trang sách */
   height: 80vh;
-  padding: 50px 60px;
+  padding: 5px 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   display: flex;
