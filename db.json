@@ -9,11 +9,11 @@
       "role": "admin",
       "favorites": [
         1,
-        49
-      ],
-      "bookmarks": [
         49,
         50
+      ],
+      "bookmarks": [
+        49
       ],
       "history": [
         50,
@@ -24,81 +24,37 @@
       "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg"
     },
     {
-      "id": "eda5",
-      "username": "duonganh7805",
-      "password": "duonganh",
+      "id": "2",
       "fullName": "Dương Anh",
-      "email": "duonganh7805@gmail.com",
+      "email": "duonganh@gmail.com",
+      "password": "123",
       "role": "user",
-      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg",
-      "favorites": [
-        1,
-        10,
-        47,
-        50
-      ],
-      "history": [
-        50,
-        49,
-        1,
-        48,
-        47,
-        4,
-        7
-      ],
-      "bookmarks": [
-        1,
-        7,
-        40,
-        47,
-        50
-      ]
+      "favorites": [],
+      "history": [],
+      "bookmarks": [],
+      "avatar": "./Image/logo.png"
     },
     {
-      "id": "4213",
-      "username": "phuchung",
-      "password": "123456",
-      "fullName": "Nguyễn Phúc Hưng",
-      "email": "phuchung@gmail.com",
-      "role": "user",
-      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg",
-      "favorites": [
-        47,
-        1,
-        42
-      ],
-      "history": [
-        11,
-        49,
-        47,
-        1,
-        48
-      ],
-      "bookmarks": [
-        49,
-        47,
-        1,
-        42
-      ]
-    },
-    {
-      "id": "db79",
-      "fullName": "Cao Văn Thận",
+      "id": "3",
+      "fullName": "Văn Thận",
       "email": "vanthan@gmail.com",
       "password": "123",
       "role": "user",
       "favorites": [],
       "history": [],
-      "avatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg"
+      "bookmarks": [],
+      "avatar": "./Image/logo.png"
     },
     {
-      "id": "7c61",
-      "fullName": "Bùi Đạt",
-      "email": "buidat@gmail.com",
+      "id": "4",
+      "fullName": "Phúc Hưng",
+      "email": "phuchung@gmail.com",
       "password": "123",
       "role": "user",
       "favorites": [],
-      "history": []
+      "history": [],
+      "bookmarks": [],
+      "avatar": "./Image/logo.png"
     }
   ],
   "stories": [
@@ -122,7 +78,7 @@
       "status": "Hoàn thành",
       "views": 1200,
       "rating": 4.2,
-      "categoryId": "e0c4"
+      "categoryId": null
     },
     {
       "id": "3",
@@ -155,7 +111,7 @@
       "status": "Hoàn thành",
       "views": 500,
       "rating": 4,
-      "categoryId": "9d38"
+      "categoryId": null
     },
     {
       "id": "6",
@@ -166,7 +122,7 @@
       "status": "Hoàn thành",
       "views": 800,
       "rating": 5,
-      "categoryId": "9d38"
+      "categoryId": null
     },
     {
       "id": "7",
@@ -693,19 +649,9 @@
       "description": "Phá án, ly kỳ"
     },
     {
-      "id": "e0c4",
-      "name": "Kinh Dị",
-      "description": "Jack 97\n"
-    },
-    {
-      "id": "9d38",
-      "name": "Hài Hước",
-      "description": "Trần Hà Linh\n"
-    },
-    {
-      "id": "9fc5",
-      "name": "Hoạt Hình",
-      "description": ""
+      "id": "4",
+      "name": "Hài hước",
+      "description": "Vui cười\n"
     }
   ],
   "comments": [
@@ -721,7 +667,7 @@
     {
       "id": "b49b",
       "storyId": "48",
-      "userId": "4213",
+      "userId": null,
       "userName": "Nguyễn Phúc Hưng",
       "userAvatar": "./Image/z5860363854817_ef706515bd5e3459395cb60f297df648.jpg",
       "content": "Được đó",
