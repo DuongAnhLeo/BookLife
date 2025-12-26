@@ -7,7 +7,6 @@ const CHAPTERS_ENDPOINT = API_URL + "/chapters";
 let allStories = [];
 let allCategories = [];
 
-// --- HELPER: XỬ LÝ TIẾNG VIỆT ---
 function removeVietnameseTones(str) {
   if (!str) return "";
   str = str.toLowerCase();
@@ -16,23 +15,17 @@ function removeVietnameseTones(str) {
   return str;
 }
 
-// --- HELPER: TẠO ID TỰ TĂNG (MỚI THÊM) ---
-// Hàm này tìm ID lớn nhất (dạng số) trong danh sách và cộng thêm 1
+// tạo id
 function generateNextId(list) {
   if (!list || list.length === 0) return "1";
-
-  // Lọc ra các ID là số (để tránh lỗi nếu lỡ có ID dạng chữ)
   const numericIds = list
     .map((item) => parseInt(item.id))
     .filter((id) => !isNaN(id));
-
   if (numericIds.length === 0) return "1";
-
   const maxId = Math.max(...numericIds);
   return (maxId + 1).toString();
 }
 
-// --- KHỞI TẠO ---
 document.addEventListener("DOMContentLoaded", () => {
   checkLogin();
   fetchDashboardData();
@@ -82,12 +75,12 @@ window.switchTab = function (tabName) {
   document.getElementById(`tab-${tabName}`).style.display = "block";
   document.getElementById(`menu-${tabName}`).classList.add("active");
 
-  if (tabName === "stories") fetchDashboardData(); // Gọi lại để update list mới nhất
+  if (tabName === "stories") fetchDashboardData();
   if (tabName === "users") fetchUsersTable();
   if (tabName === "categories") fetchCategoriesTable();
 };
 
-// ================= MODULE 1: STORIES =================
+// sách
 function getCategoryName(catId) {
   if (!catId)
     return '<span style="color:#999; font-style:italic">Chưa phân loại</span>';
@@ -163,8 +156,6 @@ document.getElementById("cover").addEventListener("input", function () {
 bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("book-id").value;
-
-  // Logic lấy dữ liệu
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const status = document.getElementById("status").value;
@@ -182,7 +173,6 @@ bookForm.addEventListener("submit", async (e) => {
     rating: id ? getStory(id).rating : 5,
   };
 
-  // Nếu là THÊM MỚI (không có id), tự sinh ID
   if (!id) {
     data.id = generateNextId(allStories);
   }
@@ -236,11 +226,10 @@ document.getElementById("search-story").addEventListener("input", (e) => {
   renderStoryTable(filtered);
 });
 
-// ================= MODULE 2: USERS =================
+// user
 async function fetchUsersTable() {
   const res = await fetch(USERS_ENDPOINT);
   const users = await res.json();
-  // Lưu vào biến toàn cục để dùng cho việc sinh ID nếu cần
   window.allUsersCache = users;
 
   const tbody = document.getElementById("user-table-body");
@@ -268,15 +257,12 @@ window.closeUserModal = () => (userModal.style.display = "none");
 userForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("user-id").value;
-
-  // Lấy dữ liệu cũ nếu là sửa
   let oldData = {};
   if (id) {
     const res = await fetch(`${USERS_ENDPOINT}/${id}`);
     oldData = await res.json();
   }
 
-  // Lấy danh sách user hiện tại để sinh ID nếu là thêm mới
   if (!id && !window.allUsersCache) {
     const res = await fetch(USERS_ENDPOINT);
     window.allUsersCache = await res.json();
@@ -320,11 +306,11 @@ window.deleteUser = (id) =>
     fetchDashboardData();
   });
 
-// ================= MODULE 3: CATEGORIES =================
+// danh mục
 async function fetchCategoriesTable() {
   const res = await fetch(CATEGORIES_ENDPOINT);
   const cats = await res.json();
-  allCategories = cats; // Cập nhật biến toàn cục
+  allCategories = cats;
   const tbody = document.getElementById("category-table-body");
   tbody.innerHTML = "";
   cats.forEach((c) => {
@@ -386,7 +372,7 @@ window.deleteCategory = (id) =>
     fetchDashboardData();
   });
 
-// ================= MODULE 4: CHAPTERS =================
+// chương
 const chapterModal = document.getElementById("chapterModal");
 
 window.openChapterManager = async (storyId) => {
@@ -401,8 +387,6 @@ window.openChapterManager = async (storyId) => {
 };
 
 window.closeChapterModal = () => (chapterModal.style.display = "none");
-
-// Lưu cache chương để tính ID chương mới
 let currentStoryChapters = [];
 
 async function fetchChapters(storyId) {
@@ -410,7 +394,7 @@ async function fetchChapters(storyId) {
   listContainer.innerHTML = "Đang tải...";
   try {
     const res = await fetch(`${CHAPTERS_ENDPOINT}?storyId=${storyId}`);
-    currentStoryChapters = await res.json(); // Lưu vào biến tạm
+    currentStoryChapters = await res.json();
 
     listContainer.innerHTML = "";
     if (currentStoryChapters.length === 0) {
@@ -466,23 +450,6 @@ window.saveChapter = async () => {
 
   let data = { storyId, title, content };
 
-  // Đối với Chapter, ta cần lấy toàn bộ chapter của TOÀN BỘ hệ thống để sinh ID không trùng
-  // Tuy nhiên để tối ưu, nếu dùng json-server, ta nên để nó tự sinh ID chuỗi cho chapter,
-  // vì chapter số lượng rất lớn và việc fetch tất cả về để tính maxID là không tối ưu.
-  // Nhưng nếu bạn vẫn muốn ID số cho Chapter, ta phải fetch all chapters.
-  // Ở đây tôi giữ nguyên logic cũ cho chapter (json-server tự sinh string ID) để đảm bảo hiệu năng,
-  // Hoặc dùng generateNextId trên currentStoryChapters (nhưng rủi ro trùng với story khác).
-  // -> Tốt nhất với Chapter nên để ID ngẫu nhiên hoặc dùng timestamp.
-
-  // Nếu bạn MUỐN ID số cho Chapter, hãy uncomment đoạn dưới (nhưng sẽ chậm nếu dữ liệu lớn):
-  /*
-  if (!chapterId) {
-      const resAll = await fetch(CHAPTERS_ENDPOINT); 
-      const allChaps = await resAll.json();
-      data.id = generateNextId(allChaps);
-  }
-  */
-
   try {
     if (chapterId) {
       await fetch(`${CHAPTERS_ENDPOINT}/${chapterId}`, {
@@ -515,7 +482,7 @@ window.deleteChapter = async (event, chapterId, storyId) => {
   }
 };
 
-// ================= HELPER FUNCTIONS =================
+// helps function
 async function handleSave(endpoint, id, data, name) {
   try {
     if (id) {

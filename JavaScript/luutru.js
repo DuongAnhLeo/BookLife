@@ -1,4 +1,4 @@
-// --- 1. KIỂM TRA ĐĂNG NHẬP ---
+// check đăng nhập
 const currentUserStr = localStorage.getItem("currentUser");
 if (!currentUserStr) {
   alert("Bạn cần đăng nhập để xem kho lưu trữ!");
@@ -6,63 +6,49 @@ if (!currentUserStr) {
 }
 const currentUser = JSON.parse(currentUserStr);
 
-// Đảm bảo mảng bookmarks tồn tại
 if (!currentUser.bookmarks) currentUser.bookmarks = [];
 
-// --- 2. CẤU HÌNH API ---
 const API_URL = "http://localhost:3000/stories";
 const USER_API_URL = "http://localhost:3000/users";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Hiển thị header
   const usernameEl = document.getElementById("header-username");
   const avatarEl = document.getElementById("header-avatar");
   if (usernameEl)
     usernameEl.textContent = currentUser.fullName || currentUser.username;
   if (avatarEl) avatarEl.src = currentUser.avatar || "./Image/logo.png";
 
-  // Tải sách
   loadSavedBooks();
 });
 
-// --- 3. HÀM TẢI SÁCH ĐÃ LƯU (LOGIC MỚI - TỰ LỌC) ---
+// tải sách đã lưu
 async function loadSavedBooks() {
   const container = document.getElementById("storage-grid");
   const savedBookIds = currentUser.bookmarks || [];
 
   console.log("Danh sách ID bạn đã lưu (trong LocalStorage):", savedBookIds);
 
-  // TRƯỜNG HỢP 1: Danh sách rỗng
   if (savedBookIds.length === 0) {
     showEmptyState(container);
     return;
   }
 
   try {
-    // CHIẾN THUẬT MỚI: Gọi tất cả sách về, sau đó JS tự lọc
-    // Cách này đảm bảo không bao giờ bị lỗi hiển thị nhầm toàn bộ sách
     const response = await fetch(API_URL);
     const allBooks = await response.json();
 
-    // Tự lọc bằng Javascript:
-    // Chỉ lấy những sách mà ID của nó NẰM TRONG danh sách savedBookIds
     const myBooks = allBooks.filter((book) => {
-      // Chuyển về số (Number) để so sánh cho chính xác (tránh lỗi '1' khác 1)
       return savedBookIds.includes(Number(book.id));
     });
 
     console.log("Sách sau khi lọc:", myBooks);
-
-    // Xóa nội dung cũ
     container.innerHTML = "";
-
     if (myBooks.length === 0) {
-      // Trường hợp có ID lưu nhưng ID đó không khớp cuốn sách nào (sách bị xóa)
       showEmptyState(container);
       return;
     }
 
-    // Vẽ danh sách sách đã lọc
+    // show sách
     myBooks.forEach((book) => {
       const card = document.createElement("div");
       card.className = "book-card";
@@ -91,7 +77,7 @@ async function loadSavedBooks() {
   }
 }
 
-// Hàm hiển thị khi trống
+// kho trống
 function showEmptyState(container) {
   container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; margin-top: 50px; color: #666;">
@@ -102,22 +88,19 @@ function showEmptyState(container) {
     `;
 }
 
-// --- 4. HÀM XÓA SÁCH (BỎ BOOKMARK) ---
+// xoá sách
 async function removeBookmark(bookId) {
   if (!confirm("Bỏ cuốn này khỏi kho lưu trữ?")) return;
 
-  // Chuyển đổi bookId sang số để đảm bảo xóa đúng
   const idToRemove = Number(bookId);
 
-  // Xóa khỏi mảng bookmarks
   currentUser.bookmarks = currentUser.bookmarks.filter(
     (id) => id !== idToRemove
   );
 
-  // Cập nhật LocalStorage
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-  // Cập nhật Server
+  // cập nhật server
   try {
     await fetch(`${USER_API_URL}/${currentUser.id}`, {
       method: "PATCH",
@@ -125,7 +108,6 @@ async function removeBookmark(bookId) {
       body: JSON.stringify({ bookmarks: currentUser.bookmarks }),
     });
 
-    // Tải lại giao diện
     loadSavedBooks();
   } catch (error) {
     console.error(error);

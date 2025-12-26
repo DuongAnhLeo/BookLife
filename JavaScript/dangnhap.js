@@ -7,7 +7,6 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    // Gọi API tìm user có email và password trùng khớp
     const response = await fetch(
       `${API_URL}?email=${email}&password=${password}`
     );
@@ -15,18 +14,14 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     if (users.length > 0) {
       const user = users[0];
-
-      // LƯU THÔNG TIN ĐĂNG NHẬP
       localStorage.setItem("currentUser", JSON.stringify(user));
 
-      // --- SỬA Ở ĐÂY: KIỂM TRA QUYỀN (ROLE) ---
       if (user.role === "admin") {
         alert(`Xin chào Admin ${user.fullName}!`);
-        // Thay 'admin.html' bằng tên file trang quản trị của bạn
         window.location.href = "admin.html";
       } else {
         alert(`Xin chào ${user.fullName}, chúc bạn đọc sách vui vẻ!`);
-        window.location.href = "index.html"; // Khách thường về trang chủ
+        window.location.href = "index.html";
       }
     } else {
       alert("Email hoặc mật khẩu không chính xác!");

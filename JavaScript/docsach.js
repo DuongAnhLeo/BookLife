@@ -1,4 +1,4 @@
-// --- 1. KIỂM TRA ĐĂNG NHẬP ---
+// check đăng nhập
 const currentUserStr = localStorage.getItem("currentUser");
 if (!currentUserStr) {
   alert("Vui lòng đăng nhập để đọc truyện!");
@@ -6,18 +6,15 @@ if (!currentUserStr) {
 }
 const currentUser = JSON.parse(currentUserStr);
 
-// --- 2. CẤU HÌNH API ---
 const API_URL = "http://localhost:3000";
 const USER_API_URL = "http://localhost:3000/users";
 
-// --- 3. BIẾN TOÀN CỤC ---
 let gStoryId = null;
 let gChapters = [];
 let gCurrentChapterIndex = 0;
 let gChapterPages = [];
 let gCurrentPageIndex = 0;
 
-// Tăng số lượng ký tự lên một chút vì giao diện mới rộng rãi hơn
 const MAX_CHARS_PER_PAGE = 2000;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTocEvents();
 });
 
-// --- KHỞI TẠO DỮ LIỆU ---
+// khởi tạo dữ liệu
 async function initReadingData(storyId, chapterOrder) {
   try {
     const storyRes = await fetch(`${API_URL}/stories/${storyId}`);
@@ -69,7 +66,7 @@ async function initReadingData(storyId, chapterOrder) {
   }
 }
 
-// --- XỬ LÝ NỘI DUNG ---
+// nội dung sách
 function loadChapterAndRender(chapterIndex, pageIndexToStart) {
   const chapter = gChapters[chapterIndex];
 
@@ -94,16 +91,12 @@ function loadChapterAndRender(chapterIndex, pageIndexToStart) {
   renderCurrentPage();
 }
 
-/**
- * Cắt nội dung thông minh
- */
+//cắt nội dung để chuyển trang
 function splitContentSmartly(htmlContent, limit) {
-  // Lấy text thuần để tính toán
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = htmlContent;
   let fullText = tempDiv.innerText || tempDiv.textContent || "";
 
-  // Nếu text quá ngắn
   if (fullText.length <= limit) {
     return [formatTextToHTML(fullText)];
   }
@@ -113,14 +106,12 @@ function splitContentSmartly(htmlContent, limit) {
 
   while (startIndex < fullText.length) {
     let endIndex = startIndex + limit;
-
     if (endIndex >= fullText.length) {
       let chunk = fullText.slice(startIndex);
       pages.push(formatTextToHTML(chunk));
       break;
     }
 
-    // Tìm điểm ngắt đẹp (dấu câu)
     let safeEndIndex = -1;
     const lookBackRange = 300;
     const searchString = fullText.slice(
@@ -156,20 +147,16 @@ function splitContentSmartly(htmlContent, limit) {
   return pages;
 }
 
-// FORMAT TEXT: Quan trọng để hiển thị đẹp
+// form của text
 function formatTextToHTML(text) {
   let cleanText = text.trim();
-  // Tách theo dòng mới
   let paragraphs = cleanText.split("\n").filter((p) => p.trim() !== "");
-
-  // Nếu không có xuống dòng nào (nguyên cục text), vẫn bọc vào thẻ p
   if (paragraphs.length === 0 && cleanText.length > 0)
     return `<p>${cleanText}</p>`;
-
   return paragraphs.map((p) => `<p>${p}</p>`).join("");
 }
 
-// --- RENDER ---
+// render
 function renderCurrentPage() {
   const contentEl = document.getElementById("chapter-content");
   const pageInfoEl = document.getElementById("page-info");
@@ -197,7 +184,7 @@ function renderCurrentPage() {
   }
 }
 
-// --- ĐIỀU HƯỚNG ---
+// điều hướng
 function updateNavButtons() {
   const btnPrev = document.getElementById("btn-prev");
   const btnNext = document.getElementById("btn-next");
@@ -231,14 +218,13 @@ function updateNavButtons() {
   };
 }
 
-// --- MỤC LỤC & LỊCH SỬ ---
+// mục lục
 function renderTableOfContents(chapters, storyId, currentOrder) {
   const listContainer = document.getElementById("toc-list");
   listContainer.innerHTML = "";
   chapters.forEach((chap, index) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    // Xử lý tiêu đề dài trong mục lục
     a.textContent = chap.title;
     a.href = "#";
     a.onclick = (e) => {

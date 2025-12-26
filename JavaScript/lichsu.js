@@ -1,4 +1,4 @@
-// --- 1. KIỂM TRA ĐĂNG NHẬP ---
+// check đăng nhập
 const currentUserStr = localStorage.getItem("currentUser");
 if (!currentUserStr) {
   alert("Bạn cần đăng nhập để xem lịch sử!");
@@ -6,10 +6,9 @@ if (!currentUserStr) {
 }
 const currentUser = JSON.parse(currentUserStr);
 
-// Đảm bảo có mảng history
+// check xem đã đảm bảo có sách nào đã đọc chưa
 if (!currentUser.history) currentUser.history = [];
 
-// --- 2. CẤU HÌNH API ---
 const API_URL = "http://localhost:3000/stories";
 const USER_API_URL = "http://localhost:3000/users";
 
@@ -24,36 +23,33 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHistoryBooks();
 });
 
-// --- 3. TẢI LỊCH SỬ (LOGIC CHẮC CHẮN ĐÚNG) ---
+// lịch sử
 async function loadHistoryBooks() {
   const container = document.getElementById("history-grid");
   const historyIds = currentUser.history || [];
 
   console.log("Danh sách ID lịch sử:", historyIds);
 
-  // TRƯỜNG HỢP 1: Lịch sử trống
+  // nếu lịch sử trống
   if (historyIds.length === 0) {
     showEmptyState(container);
     return;
   }
 
   try {
-    // Lấy TOÀN BỘ sách về để tự lọc
+    // lấy sách về
     const response = await fetch(API_URL);
     const allBooks = await response.json();
 
-    // LOGIC LỌC MỚI (SỬA LỖI):
-    // Duyệt qua từng ID trong lịch sử, tìm cuốn sách tương ứng trong kho
+    //duyệt sách
     const historyBooks = historyIds
       .map((historyId) => {
-        // Dùng .find() và ép kiểu Number() cho cả 2 vế để so sánh chính xác
         return allBooks.find((book) => Number(book.id) === Number(historyId));
       })
-      .filter((book) => book !== undefined); // Loại bỏ những kết quả không tìm thấy (undefined)
-
+      .filter((book) => book !== undefined);
     console.log("Sách tìm được:", historyBooks);
 
-    // Xóa loading
+    // xoá loading
     container.innerHTML = "";
 
     if (historyBooks.length === 0) {
@@ -61,7 +57,7 @@ async function loadHistoryBooks() {
       return;
     }
 
-    // Vẽ sách ra màn hình
+    // show sách
     historyBooks.forEach((book) => {
       const card = document.createElement("div");
       card.className = "book-card";
@@ -103,11 +99,9 @@ function showEmptyState(container) {
     `;
 }
 
-// --- 4. XÓA 1 MỤC LỊCH SỬ ---
+// xoá lịch sử
 async function removeHistoryItem(bookId) {
   if (!confirm("Xóa cuốn này khỏi lịch sử đọc?")) return;
-
-  // Ép kiểu số để lọc chính xác
   const idToRemove = Number(bookId);
   currentUser.history = currentUser.history.filter(
     (id) => Number(id) !== idToRemove
@@ -117,7 +111,7 @@ async function removeHistoryItem(bookId) {
   loadHistoryBooks();
 }
 
-// --- 5. XÓA TẤT CẢ ---
+// xoá hết
 async function clearAllHistory() {
   if (!confirm("Xóa TOÀN BỘ lịch sử đọc?")) return;
 
@@ -126,7 +120,7 @@ async function clearAllHistory() {
   loadHistoryBooks();
 }
 
-// Hàm lưu chung lên Server & LocalStorage
+// lưu vào server
 async function saveHistory() {
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   try {

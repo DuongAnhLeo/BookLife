@@ -4,25 +4,25 @@ const CAT_URL = "http://localhost:3000/categories";
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Website đã tải xong, bắt đầu chạy JS...");
 
-  // 1. Kiểm tra đăng nhập
+  // kiểm tra đăng nhập
   checkLoginStatus();
 
-  // 2. Lấy tham số từ URL
+  // lấy tham số từ URL
   const urlParams = new URLSearchParams(window.location.search);
   const searchKeyword = urlParams.get("search");
   const categoryId = urlParams.get("category");
 
-  // 3. Tải danh mục và hiển thị thanh lọc
+  // tải danh mục
   fetchCategories(categoryId);
 
-  // 4. Tải danh sách sách (Kết hợp tìm kiếm + Lọc danh mục)
+  // tìm kiếm theo tên, tác giả, danh mục
   fetchBooks(searchKeyword, categoryId);
 
-  // 5. Kích hoạt ô tìm kiếm
+  // kích hoạt ô tìm kiếm
   setupSearchBox();
 });
 
-// --- HELPER: BỎ DẤU TIẾNG VIỆT ---
+// hàm bỏ dấu tiếng việt
 function removeVietnameseTones(str) {
   if (!str) return "";
   str = str.toLowerCase();
@@ -31,7 +31,7 @@ function removeVietnameseTones(str) {
   return str;
 }
 
-// --- MODULE: DANH MỤC ---
+// danh mục
 async function fetchCategories(activeId) {
   const catContainer = document.getElementById("category-filter");
   if (!catContainer) return;
@@ -42,20 +42,18 @@ async function fetchCategories(activeId) {
 
     catContainer.innerHTML = "";
 
-    // 1. Nút "Tất cả"
+    // tất cả
     const allBtn = document.createElement("a");
     allBtn.className = `cat-btn ${!activeId ? "active" : ""}`;
     allBtn.innerText = "Tất cả";
-    allBtn.href = "index.html"; // Bấm vào đây để reset bộ lọc
+    allBtn.href = "index.html";
     catContainer.appendChild(allBtn);
 
-    // 2. Các nút danh mục từ API
+    // nút danh mục
     categories.forEach((cat) => {
       const btn = document.createElement("a");
-      // Nếu ID trên URL trùng với ID danh mục -> Thêm class active
       btn.className = `cat-btn ${activeId == cat.id ? "active" : ""}`;
       btn.innerText = cat.name;
-      // Khi bấm -> Chuyển hướng thêm param ?category=...
       btn.href = `index.html?category=${cat.id}`;
       catContainer.appendChild(btn);
     });
@@ -65,7 +63,7 @@ async function fetchCategories(activeId) {
   }
 }
 
-// --- MODULE: TẢI SÁCH VÀ LỌC (LOGIC KÉP) ---
+// tải sách và lọc sách
 async function fetchBooks(keyword = null, catId = null) {
   const container = document.getElementById("book-container");
   if (!container) return;
@@ -77,19 +75,17 @@ async function fetchBooks(keyword = null, catId = null) {
     let books = await response.json();
     let displayList = books;
 
-    // --- BƯỚC 1: LỌC THEO DANH MỤC (Nếu có chọn) ---
+    // lọc theo danh mục
     if (catId) {
       displayList = displayList.filter((b) => b.categoryId == catId);
 
-      // Cập nhật tiêu đề
       const heading = document.getElementById("section-heading");
-      // Chúng ta có thể fetch tên danh mục để hiển thị đẹp hơn,
-      // nhưng tạm thời để đơn giản:
       if (heading) heading.textContent = "KẾT QUẢ LỌC THEO DANH MỤC";
     }
 
-    // --- BƯỚC 2: LỌC THEO TỪ KHÓA TÌM KIẾM (Nếu có nhập) ---
+    // lọc theo từ khoá
     if (keyword) {
+      // trim() để xoá dấu cách ở 2 đầu
       const term = removeVietnameseTones(keyword).trim();
       displayList = displayList.filter((book) => {
         const title = removeVietnameseTones(book.title);
@@ -97,17 +93,16 @@ async function fetchBooks(keyword = null, catId = null) {
         return title.includes(term) || author.includes(term);
       });
 
-      // Cập nhật tiêu đề (Ưu tiên hiển thị info tìm kiếm)
       const heading = document.getElementById("section-heading");
       if (heading) heading.textContent = `TÌM KIẾM: "${keyword}"`;
     }
 
-    // Nếu không lọc gì cả -> Đảo ngược để hiện mới nhất
+    // ko lọc gì
     if (!keyword && !catId) {
       displayList.reverse();
     }
 
-    // --- BƯỚC 3: RENDER RA HTML ---
+    // render ra html để hiển thị
     renderBookList(container, displayList);
   } catch (error) {
     console.error("Lỗi tải sách:", error);
@@ -143,34 +138,33 @@ function renderBookList(container, list) {
   });
 }
 
-// --- XỬ LÝ SỰ KIỆN Ô TÌM KIẾM ---
+// xử lý ở ô tìm kiếm
 function setupSearchBox() {
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-btn");
 
   if (!searchInput) return;
 
-  // Giữ lại từ khóa trên ô input
+  // giữ lại từ khoá trên ô tìm kiếm khi bấm nút enter
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("search")) {
     searchInput.value = urlParams.get("search");
   }
 
-  // Lấy category hiện tại để giữ nguyên khi tìm kiếm (nếu muốn tìm trong danh mục)
-  // Hoặc bỏ qua nếu muốn tìm toàn cục. Ở đây tôi chọn: Tìm kiếm sẽ reset category về tất cả để tìm rộng hơn.
-
+  // khi ấn enter sẽ biết được ng dùng đang muốn tìm kiếm
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") doSearch(searchInput.value);
   });
 
+  // hoặc là khi click vào nút button
   if (searchBtn) {
     searchBtn.addEventListener("click", () => doSearch(searchInput.value));
   }
 }
 
+// trả về index nếu ko search gì
 function doSearch(keyword) {
   const term = keyword.trim();
-  // Khi tìm kiếm, ta chuyển về trang chủ với param search, bỏ qua category để tìm toàn bộ
   if (term) {
     window.location.href = `index.html?search=${encodeURIComponent(term)}`;
   } else {
@@ -178,7 +172,7 @@ function doSearch(keyword) {
   }
 }
 
-// --- KIỂM TRA ĐĂNG NHẬP & QUYỀN ADMIN ---
+// ktra đăng nhập và check quyền
 function checkLoginStatus() {
   const userJson = localStorage.getItem("currentUser");
   const guestAction = document.getElementById("guest-action");
